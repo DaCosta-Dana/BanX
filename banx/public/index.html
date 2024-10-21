@@ -1,36 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Connexion - My Web App</title>
-  <link rel="stylesheet" href="/styles.css">
-</head>
-<body>
-  <h1>Connexion</h1>
-  <form id="loginForm">
-    <label for="username">Nom d'utilisateur :</label>
-    <input type="text" id="username" name="username" required>
-    <br>
-    <label for="password">Mot de passe :</label>
-    <input type="password" id="password" name="password" required>
-    <br>
-    <button type="submit">Se connecter</button>
-  </form>
-  <h1>Inscription</h1>
-  <form id="signupForm">
-    <label for="username">Nom d'utilisateur :</label>
-    <input type="text" id="username" name="username" required>
-    <br>
-    <label for="email">Email :</label>
-    <input type="email" id="email" name="email" required>
-    <br>
-    <label for="password">Mot de passe :</label>
-    <input type="password" id="password" name="password" required>
-    <br>
-    <button type="submit">S'inscrire</button>
-  </form>
 
-  <script src="/main.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BanX - Login & Signup</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Left container for the image -->
+        <div class="leftContainer">
+            <img src="Assets/gold_dollars_large.webp" alt="Coins" class="image">
+        </div>
+
+        <!-- Right container for the forms -->
+        <div class="rightContainer">
+            <h1>Welcome to BanX</h1>
+
+            <!-- Form for user login -->
+            <h2>Login</h2>
+            <form id="loginForm">
+                <label for="login-username">Username :</label>
+                <input type="text" id="login-username" name="username" placeholder="Username" required>
+                <br>
+                <label for="login-password">Password :</label>
+                <input type="password" id="login-password" name="password" placeholder="Password" required>
+                <br>
+                <a href="#" class="forgot-password">Forgot your password?</a>
+                <br>
+                <button type="submit" class="login-button">Login</button>
+            </form>
+
+            <!-- Form for user signup -->
+            <h2>Inscription</h2>
+            <form id="signupForm">
+                <label for="signup-username">Username :</label>
+                <input type="text" id="signup-username" name="username" required>
+                <br>
+                <label for="signup-email">Email :</label>
+                <input type="email" id="signup-email" name="email" required>
+                <br>
+                <label for="signup-password">Password :</label>
+                <input type="password" id="signup-password" name="password" required>
+                <br>
+                <button type="submit">Register</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
 </body>
+
 </html>
