@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    
+    <!-- Responsive design for different screen sizes -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+     <!-- Title of the webpage -->
+    <title>BanX Login</title>
+
+    <!-- Link to the external CSS stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+     <!-- Main container to put image and login form side to side -->
+    <div class="container">
+        <!-- <div> is a block-level element that is used as a container for grouping other HTML elements -->
+
+        <!-- Left container for the image -->
+        <div class="leftContainer">
+            <img src="Assets/gold_dollars_large.webp" alt="Coins" class="image">
+                <!--  If the image fails to load for any reason, the alt text will be displayed in place of the image. -->
+
+        </div>
+        
+        <!-- Right container for the login form -->
+        <div class="rightContainer">
+            
+            <h1>Welcome to BanX</h1>
+
+            <!-- Form for user login, id used in js -->
+            <form id="loginForm">
+
+                <!-- Input field for username -->
+                <input type="text" id="username" placeholder="Username" required>
+                
+                <!-- Input field for password -->
+                <input type="password" id="password" placeholder="Password" required>
+
+                <!-- Link for users to recover their password -->
+                <a href="#" class="forgot-password">Forgot your password?</a>s
+
+                <!-- Container for buttons -->
+                <div class="buttons">
+
+                    <!-- Button to navigate to the signup page -->
+                    <button type="button" class="signup-button">Sign up</button>
+                    
+                    <!-- Button to submit the login form -->
+                    <button type="submit" class="login-button">Login</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- Link to the external JavaScript file -->
+    <script src="noLogic.js"></script>
+
+</body>
+</html>
