@@ -64,6 +64,9 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    
+    /* Right container takes up ...% space */
+    width: 35%; 
 }
 
 h1 {

@@ -41,17 +41,23 @@
                 <!-- Input field for password -->
                 <input type="password" id="password" placeholder="Password" required>
 
+                <!-- New fields initially hidden -->
+                <div id="additional-fields" style="display: none;">
+                    <input type="email" placeholder="Email" required>
+                    <input type="tel" placeholder="Phone Number" required>
+                </div>
+
                 <!-- Link for users to recover their password -->
-                <a href="#" class="forgot-password">Forgot your password?</a>s
+                <a href="#" class="forgot-password">Forgot your password?</a>
 
                 <!-- Container for buttons -->
                 <div class="buttons">
 
                     <!-- Button to navigate to the signup page -->
-                    <button type="button" class="signup-button">Sign up</button>
+                    <button type="button" class="signup-button" onclick="showAdditionalFields()">Sign up</button>
                     
                     <!-- Button to submit the login form -->
-                    <button type="submit" class="login-button">Login</button>
+                    <button type="submit" class="login-button" id="submitButton">Login</button>
                 </div>
             </form>
 
@@ -59,7 +65,7 @@
     </div>
 
     <!-- Link to the external JavaScript file -->
-    <script src="noLogic.js"></script>
+    <script src="login.js"></script>
 
 </body>
 </html>

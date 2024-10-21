@@ -3,8 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
+
+    <!-- Responsive design for different screen sizes -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BanX - Login & Signup</title>
+    
+    <title>BanX Login</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -14,40 +17,37 @@
         <!-- Left container for the image -->
         <div class="leftContainer">
             <img src="Assets/gold_dollars_large.webp" alt="Coins" class="image">
+                 <!--  If the image fails to load for any reason, the alt text will be displayed in place of the image. -->
+
         </div>
 
         <!-- Right container for the forms -->
         <div class="rightContainer">
+
             <h1>Welcome to BanX</h1>
 
-            <!-- Form for user login -->
-            <h2>Login</h2>
+              <!-- Login Form -->
             <form id="loginForm">
-                <label for="login-username">Username :</label>
                 <input type="text" id="login-username" name="username" placeholder="Username" required>
-                <br>
-                <label for="login-password">Password :</label>
                 <input type="password" id="login-password" name="password" placeholder="Password" required>
-                <br>
                 <a href="#" class="forgot-password">Forgot your password?</a>
-                <br>
                 <button type="submit" class="login-button">Login</button>
             </form>
 
-            <!-- Form for user signup -->
-            <h2>Inscription</h2>
-            <form id="signupForm">
-                <label for="signup-username">Username :</label>
-                <input type="text" id="signup-username" name="username" required>
-                <br>
-                <label for="signup-email">Email :</label>
-                <input type="email" id="signup-email" name="email" required>
-                <br>
-                <label for="signup-password">Password :</label>
-                <input type="password" id="signup-password" name="password" required>
-                <br>
-                <button type="submit">Register</button>
+            <!-- Signup Form -->
+            <form id="signupForm" style="display: none;">
+                <input type="text" id="signup-username" name="username" placeholder="Username" required>
+                <input type="email" id="signup-email" name="email" placeholder="Email" required>
+                <input type="tel" id="phone" placeholder="Phone Number" required>
+                <input type="password" id="signup-password" name="password" placeholder="Password" required>
+                <button type="submit" class="signup-button">Sign Up</button>
             </form>
+
+             <!-- Toggle between forms -->
+             <p id="toggleForm">
+                Don't have an account? <a href="#" id="switchToSignup">Sign up here</a>
+            </p>
+
         </div>
     </div>
 

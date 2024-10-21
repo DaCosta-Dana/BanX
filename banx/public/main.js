@@ -1,3 +1,32 @@
+// Toggle between login and signup forms
+document.getElementById('switchToSignup').addEventListener('click', function (e) {
+  e.preventDefault();
+
+  // Hide the login form and show the signup form
+  document.getElementById('loginForm').style.display = 'none';
+  document.getElementById('signupForm').style.display = 'block';
+
+  // Update the toggle text to allow switching back to login
+  document.getElementById('toggleForm').innerHTML = 'Already have an account? <a href="#" id="switchToLogin">Login here</a>';
+
+  // Add event listener to switch back to login
+  document.getElementById('switchToLogin').addEventListener('click', function (e) {
+    e.preventDefault();
+    document.getElementById('loginForm').style.display = 'block';
+    document.getElementById('signupForm').style.display = 'none';
+    document.getElementById('toggleForm').innerHTML = 'Don\'t have an account? <a href="#" id="switchToSignup">Sign up here</a>';
+    document.getElementById('switchToSignup').addEventListener('click', switchToSignup);
+  });
+});
+  
+// Helper function to toggle forms
+function switchToSignup(e) {
+  e.preventDefault();
+  document.getElementById('loginForm').style.display = 'none';
+  document.getElementById('signupForm').style.display = 'block';
+  document.getElementById('toggleForm').innerHTML = 'Already have an account? <a href="#" id="switchToLogin">Login here</a>';
+}
+
 // Login form submission
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
   e.preventDefault(); // Prevent the default form submission behavior
