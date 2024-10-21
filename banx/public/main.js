@@ -1,31 +1,22 @@
-// Toggle between login and signup forms
-document.getElementById('switchToSignup').addEventListener('click', function (e) {
+// Event listener for switching between login and signup forms
+document.getElementById('toggleForm').addEventListener('click', function (e) {
   e.preventDefault();
 
-  // Hide the login form and show the signup form
-  document.getElementById('loginForm').style.display = 'none';
-  document.getElementById('signupForm').style.display = 'block';
+  const loginForm = document.getElementById('loginForm');
+  const signupForm = document.getElementById('signupForm');
+  const toggleText = document.getElementById('toggleForm');
 
-  // Update the toggle text to allow switching back to login
-  document.getElementById('toggleForm').innerHTML = 'Already have an account? <a href="#" id="switchToLogin">Login here</a>';
-
-  // Add event listener to switch back to login
-  document.getElementById('switchToLogin').addEventListener('click', function (e) {
-    e.preventDefault();
-    document.getElementById('loginForm').style.display = 'block';
-    document.getElementById('signupForm').style.display = 'none';
-    document.getElementById('toggleForm').innerHTML = 'Don\'t have an account? <a href="#" id="switchToSignup">Sign up here</a>';
-    document.getElementById('switchToSignup').addEventListener('click', switchToSignup);
-  });
+  // Toggle forms based on visibility
+  if (loginForm.style.display === 'none') {
+    signupForm.style.display = 'none';
+    loginForm.style.display = 'block';
+    toggleText.innerHTML = 'Don\'t have an account? <a href="#" id="switchToSignup">Sign up here</a>';
+  } else {
+    loginForm.style.display = 'none';
+    signupForm.style.display = 'block';
+    toggleText.innerHTML = 'Already have an account? <a href="#" id="switchToLogin">Login here</a>';
+  }
 });
-  
-// Helper function to toggle forms
-function switchToSignup(e) {
-  e.preventDefault();
-  document.getElementById('loginForm').style.display = 'none';
-  document.getElementById('signupForm').style.display = 'block';
-  document.getElementById('toggleForm').innerHTML = 'Already have an account? <a href="#" id="switchToLogin">Login here</a>';
-}
 
 // Login form submission
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
