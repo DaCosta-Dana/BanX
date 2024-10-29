@@ -13,7 +13,7 @@ const utilisateurSchema = new mongoose.Schema({
     unique: true
   },
   phone_number: {
-    type: Int16Array,
+    type: String,
     required: true,
     unique: true
   },
