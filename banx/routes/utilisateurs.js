@@ -24,5 +24,30 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.post('/login', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+
+    // Recherchez l'utilisateur par nom d'utilisateur
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      // Si l'utilisateur n'existe pas, renvoyer une erreur
+      return res.status(400).json({ message: 'Utilisateur non trouvé' });
+    }
+
+    // Comparaison du mot de passe directement
+    if (user.password !== password) {
+      // Mot de passe incorrect
+      return res.status(400).json({ message: 'Mot de passe incorrect' });
+    }
+
+    // Connexion réussie
+    res.status(200).json({ message: 'Connexion réussie' });
+  } catch (err) {
+    res.status(500).json({ message: 'Erreur du serveur' });
+  }
+});
+
 // Exporter le routeur
 module.exports = router;

@@ -3,10 +3,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const Utilisateur = require('./models/utilisateur');
 const app = express();
-const bcrypt = require('bcrypt');
 
-
-// URL de connexion à MongoDB (remplacez <password> par votre mot de passe)
+// URL de connexion à MongoDB
 const mongoURI = "mongodb+srv://erwanweinmann:eweinmann@cluster0.wyyff.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 mongoose.connect(mongoURI)
@@ -24,7 +22,7 @@ const utilisateursRoutes = require('./routes/utilisateurs');
 app.use('/utilisateurs', utilisateursRoutes);
 
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/public/index.html');
+  res.sendFile(__dirname + '/public/login.html');
 });
 
 app.post('/signup', async (req, res) => {
@@ -55,15 +53,14 @@ app.post('/login', async (req, res) => {
   }
 
   try {
-    // Find the user by username
+    // Trouver l'utilisateur par nom d'utilisateur
     const utilisateur = await Utilisateur.findOne({ username });
     if (!utilisateur) {
       return res.status(400).send({ message: 'Utilisateur non trouvé.' });
     }
 
-    // Compare the password with the stored hashed password
-    const isPasswordValid = await bcrypt.compare(password, utilisateur.password);
-    if (!isPasswordValid) {
+    // Comparer directement les mots de passe
+    if (utilisateur.password !== password) {
       return res.status(400).send({ message: 'Mot de passe incorrect.' });
     }
 
@@ -73,6 +70,8 @@ app.post('/login', async (req, res) => {
     res.status(500).send({ message: 'Erreur lors de la connexion.' });
   }
 });
+
+
 
 // Démarrer le serveur
 const port = 3000;
