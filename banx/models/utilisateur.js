@@ -12,8 +12,8 @@ const utilisateurSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
-  phone_number: {
-    type: Int16Array,
+  phone: {
+    type: String,
     required: true,
     unique: true
   },

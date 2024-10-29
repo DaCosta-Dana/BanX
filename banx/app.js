@@ -3,6 +3,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const Utilisateur = require('./models/utilisateur');
 const app = express();
+const bcrypt = require('bcrypt');
+
 
 // URL de connexion à MongoDB (remplacez <password> par votre mot de passe)
 const mongoURI = "mongodb+srv://erwanweinmann:eweinmann@cluster0.wyyff.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
@@ -26,21 +28,49 @@ app.get('/', (req, res) => {
 });
 
 app.post('/signup', async (req, res) => {
-  const { username, email, password } = req.body;
+  const { username, email, password, phone } = req.body;
 
-  if (!username || !email || !password) {
+  if (!username || !email || !password || !phone) {
     return res.status(400).send({ message: 'Tous les champs sont requis.' });
   }
 
   try {
     // Créer un nouvel utilisateur
-    const nouvelUtilisateur = new Utilisateur({ username, email, password });
+    const nouvelUtilisateur = new Utilisateur({ username, email, password, phone });
     await nouvelUtilisateur.save();
 
     res.status(201).send({ message: 'Inscription réussie' });
   } catch (err) {
     console.error(err);
     res.status(400).send({ message: 'Erreur lors de l\'inscription' });
+  }
+});
+
+// Login route
+app.post('/login', async (req, res) => {
+  const { username, password } = req.body;
+
+  if (!username || !password) {
+    return res.status(400).send({ message: 'Tous les champs sont requis.' });
+  }
+
+  try {
+    // Find the user by username
+    const utilisateur = await Utilisateur.findOne({ username });
+    if (!utilisateur) {
+      return res.status(400).send({ message: 'Utilisateur non trouvé.' });
+    }
+
+    // Compare the password with the stored hashed password
+    const isPasswordValid = await bcrypt.compare(password, utilisateur.password);
+    if (!isPasswordValid) {
+      return res.status(400).send({ message: 'Mot de passe incorrect.' });
+    }
+
+    res.status(200).send({ message: 'Connexion réussie.' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ message: 'Erreur lors de la connexion.' });
   }
 });
 
