@@ -10,11 +10,11 @@ document.getElementById('toggleForm').addEventListener('click', function (e) {
   if (loginForm.style.display === 'none') {
     signupForm.style.display = 'none';
     loginForm.style.display = 'block';
-    toggleText.innerHTML = 'Don\'t have an account? <a href="#" id="switchToSignup">Sign up here</a>';
+    toggleText.innerHTML = 'Don\'t have an account? <a href="#" id="switchToSignup" class="signup-link">Sign up here</a>';
   } else {
     loginForm.style.display = 'none';
     signupForm.style.display = 'block';
-    toggleText.innerHTML = 'Already have an account? <a href="#" id="switchToLogin">Login here</a>';
+    toggleText.innerHTML = 'Already have an account? <a href="#" id="switchToLogin" class="signup-link">Login here</a>';
   }
 });
 

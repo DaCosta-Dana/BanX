@@ -114,42 +114,49 @@ input {
     font-size: 12px;
     margin-bottom: 20px;
     display: block;
-    text-align: center;
+    text-align: right;
 }
 
 .forgot-password:hover {
     text-decoration: underline;
 }
 
-.buttons {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+.account-text {
+    font-size: 12px; /* Match font size of forgot password */
+    color: #000; /* Black colour for "Don't have an account?" text */
+    text-align: center;
+    margin-top: 10px;
 }
 
-.signup-button, .login-button {
-    width: 47%;
+.signup-link {
+    color: #5D71D6; /* Same colour as forgot-password link */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.signup-link:hover {
+    text-decoration: underline;
+}
+
+.button-container {
+    display: flex;
+    margin-top: 20px;
+
+    /* Centers the button horizontally */
+    justify-content: center;
+}
+
+.button {
+    width: 45%;
     padding: 15px;
     border: none;
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
-}
-
-.signup-button {
     background-color: #E9876A;
     color: white;
 }
 
-.login-button {
-    background-color: #545454;
-    color: white;
-}
-
-.signup-button:hover {
+.button:hover {
     background-color: #f08b75;
-}
-
-.login-button:hover {
-    background-color: #6a6a6a;
 }
