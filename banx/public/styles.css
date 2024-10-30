@@ -160,3 +160,21 @@ input {
 .button:hover {
     background-color: #f08b75;
 }
+
+.logo-container {
+    position: fixed;
+    bottom: 20px; /* Adjust the distance from the bottom */
+    left: 20px; /* Adjust the distance from the left */
+    z-index: 1000; /* Ensure it stays above other elements */
+}
+
+.logo {
+    width: 50px; /* Adjust the size of your logo */
+    height: auto;
+    opacity: 0.8; /* Optional: make it slightly transparent */
+    transition: opacity 0.3s; /* Smooth transition for hover effect */
+}
+
+.logo:hover {
+    opacity: 1; /* Fully opaque on hover */
+}
