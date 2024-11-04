@@ -1,0 +1,162 @@
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Layout */
+.container {
+    display: flex;
+}
+
+.sidebar {
+    width: 220px;
+    background-color: #f8f9fa;
+    padding: 20px;
+}
+
+.sidebar .logo h2 {
+    font-size: 24px;
+    color: #ff6b6b;
+    margin-bottom: 20px;
+}
+
+.sidebar nav ul {
+    list-style-type: none;
+}
+
+.sidebar nav ul li {
+    padding: 10px;
+    font-size: 18px;
+    color: #333;
+    cursor: pointer;
+}
+
+.sidebar nav ul li.active {
+    color: #ff6b6b;
+    font-weight: bold;
+}
+
+.sidebar .badge {
+    background: #ff6b6b;
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 50%;
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+.sidebar-bottom {
+    position: absolute;
+    bottom: 20px;
+    font-size: 18px;
+    color: #333;
+}
+
+main {
+    flex: 1;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+}
+
+.profile-name {
+    margin-right: 10px;
+}
+
+.profile-pic {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.balance-section {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.balance, .money-flow {
+    width: 48%;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.amount {
+    font-size: 36px;
+    color: green;
+    margin: 10px 0;
+}
+
+.spending-limit {
+    font-size: 14px;
+    color: #777;
+}
+
+.progress-bar {
+    background-color: #e0e0e0;
+    height: 10px;
+    border-radius: 5px;
+}
+
+.progress {
+    background-color: #ff6b6b;
+    height: 10px;
+    border-radius: 5px;
+}
+
+.transfer-button {
+    margin-top: 15px;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    background-color: #ff6b6b;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.transactions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.recent-transactions, .upcoming-payments {
+    width: 48%;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.recent-transactions ul {
+    list-style-type: none;
+}
+
+.recent-transactions li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+/* CSS for transaction statuses */
+.status.success {
+    color: green;
+}
+
+.status.pending {
+    color: orange;
+}

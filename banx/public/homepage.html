@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BanX Homepage</title>
+    <link rel="stylesheet" href="CSS/homepage.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>BanX</h2>
+            </div>
+            <nav>
+                <ul>
+                    <li class="active">Dashboard</li>
+                    <li>My Account</li>
+                    <li>Payments <span class="badge">5</span></li>
+                    <li>Analytics</li>
+                    <li>Calendar</li>
+                    <li>Support</li>
+                </ul>
+            </nav>
+            <div class="sidebar-bottom">
+                <div>Settings</div>
+                <div>Log out</div>
+            </div>
+        </aside>
+
+
+        <!-- Main Content -->
+        <main>
+            <header>
+                <h1>Good Morning, <span id="username">[insert username]</span></h1>
+                <div class="profile">
+                    <input type="text" placeholder="Search">
+                    <span class="profile-name">Shelly J.</span>
+                    <img src="Assets/profile_pic.jpg" alt="profile picture" class="profile-pic">
+                </div>
+            </header>
+
+            <section class="balance-section">
+                <div class="balance">
+                    <h2>Your Total Balance</h2>
+                    <p class="amount" id="total-balance">€0.00</p>
+                    <p class="spending-limit">Monthly Spending Limit</p>
+                    <div class="progress-bar">
+                        <div class="progress" id="spending-progress" style="width: 0%;"></div>
+                    </div>
+                    <p id="spending-limit-info">€0 out of €1,000</p>
+                    <button class="transfer-button">Transfer</button>
+                </div>
+
+                <div class="money-flow">
+                    <h2>Money Flow</h2>
+                    <p>Savings <span class="growth" id="savings-growth">+0%</span></p>
+                    <canvas id="moneyFlowChart"></canvas>
+                </div>
+            </section>
+
+            <section class="transactions">
+                <div class="upcoming-payments">
+                    <h2>Upcoming Payments</h2>
+                    <!-- Placeholder for adding upcoming payments content here -->
+                </div>
+
+                <div class="recent-transactions">
+                    <h2>Recent Transactions</h2>
+                    <ul id="transaction-list">
+                        <!-- Transactions will be inserted here by JavaScript -->
+                    </ul>
+                </div>
+
+            </section>
+        </main>
+    </div>
+
+    <script src="JS/homepage.js"></script>
+</body>
+</html>
