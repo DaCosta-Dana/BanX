@@ -169,12 +169,6 @@ input {
 }
 
 .logo {
-    width: 50px; /* Adjust the size of your logo */
+    width: 250px; /* Adjust the size of the logo */
     height: auto;
-    opacity: 0.8; /* Optional: make it slightly transparent */
-    transition: opacity 0.3s; /* Smooth transition for hover effect */
-}
-
-.logo:hover {
-    opacity: 1; /* Fully opaque on hover */
 }
