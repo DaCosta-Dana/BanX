@@ -20,7 +20,10 @@ const utilisateurSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true
-  }
+  },
+  balance: { 
+    type: Number, 
+    default: 0 }
 });
 
 const Utilisateur = mongoose.model('Utilisateur', utilisateurSchema);
