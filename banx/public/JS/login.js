@@ -44,7 +44,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
   if (response.ok) {
     alert('Connexion réussie');
     // Redirect to another page or perform additional actions
-    window.location.href = '/dashboard.html'; // Example redirection
+    window.location.href = '/homepage.html'; // Example redirection
   } else {
     const error = await response.json();
     alert('Échec de la connexion : ' + (error.message || 'Erreur inconnue.'));
