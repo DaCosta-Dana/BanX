@@ -2,6 +2,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const Utilisateur = require('./models/utilisateur');
+const session = require('express-session');
 
 // Creation d'une instance de Express app
 const app = express();
@@ -15,11 +16,20 @@ mongoose.connect(mongoURI)
   .then(() => console.log('Connexion à MongoDB réussie'))
   .catch((err) => console.error('Erreur de connexion à MongoDB :', err));
 
+
 // Middleware pour analyser le corps de la requête en JSON
 app.use(express.json());
 
 // Middleware pour servir des fichiers statiques (si fichier demandé, Express cherchera dans public)
 app.use(express.static('public'));
+
+
+app.use(session({
+  secret: 'your-secret-key',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false } // Set to true if using HTTPS
+}));
 
 // Importer les routes
 const utilisateursRoutes = require('./routes/utilisateurs');
@@ -80,11 +90,20 @@ app.post('/login', async (req, res) => {
     if (utilisateur.password !== password) {
       return res.status(400).send({ message: 'Mot de passe incorrect.' });
     }
-
+    req.session.userId = utilisateur._id;
+    req.session.username = utilisateur.username; 
     res.status(200).send({ message: 'Connexion réussie.' });
   } catch (err) {
     console.error(err);
     res.status(500).send({ message: 'Erreur lors de la connexion.' });
+  }
+});
+
+app.get('/utilisateurs/username', (req, res) => {
+  if (req.session.userId) {
+    res.status(200).send({ username: req.session.username });
+  } else {
+    res.status(401).send('Unauthorized');
   }
 });
 

@@ -1,20 +1,5 @@
-// Sample data for transactions, balance, and spending
-const sampleData = {
-    username: "Shelly J.",
-    balance: 10500.00,
-    spending: {
-        current: 380.00,
-        limit: 1000.00
-    },
-    savingsGrowth: 6.79,
-    transactions: [
-        { name: "Bitcoin Transactions", date: "Jan 16, 2020", account: "****45242", amount: -853.00, status: "Success" },
-        { name: "Sent to Antonia", date: "Jan 16, 2020", account: "****87212", amount: -153.00, status: "Pending" },
-        { name: "Withdraw Paypal", date: "Jan 16, 2020", account: "****36275", amount: +223.00, status: "Success" }
-    ]
-};
-
 // Function to update the username
+/* 
 function updateUsername() {
     document.getElementById("username").textContent = sampleData.username;
 }
@@ -25,6 +10,53 @@ function updateBalance() {
     balanceElement.textContent = `€${sampleData.balance.toFixed(2)}`;
 }
 
+ */
+async function fetchUsername() {
+    try {
+        const response = await fetch('/utilisateurs/username');
+        if (!response.ok) {
+            throw new Error('Failed to fetch username');
+        }
+        const data = await response.json();
+        alert(data.username);
+        return data.username;
+    } catch (error) {
+        console.error('Error fetching username:', error);
+        return null;
+    }
+}
+
+
+
+// Function to fetch balance from the backend
+async function fetchBalance(username) {
+    try {
+        const response = await fetch(`/utilisateurs/balance/${username}`);
+        console.log('Response status:', response.status);
+        if (!response.ok) {
+            alert("Error fetching balance");
+            throw new Error('Failed to fetch balance');
+        }
+        const data = await response.json();
+        console.log('Response data:', data);
+        alert(data);
+        return data.balance;
+    } catch (error) {
+        console.error('Error fetching balance:', error);
+        return 1293439200;
+    }
+}
+
+// Function to update the balance
+async function updateBalance() {
+    const username = await fetchUsername();
+    const balance = await fetchBalance(username);
+    const balanceElement = document.getElementById("total-balance");
+    alert(balance);
+    balanceElement.textContent = `€${balance.toFixed(2)}`;
+}
+
+/*  
 // Function to update the spending limit
 function updateSpendingLimit() {
     const spendingLimitInfo = document.getElementById("spending-limit-info");
@@ -37,11 +69,12 @@ function updateSpendingLimit() {
 }
 
 // Function to update the savings growth
+
 function updateSavingsGrowth() {
     const growthElement = document.getElementById("savings-growth");
     growthElement.textContent = `+${sampleData.savingsGrowth.toFixed(2)}%`;
 }
-
+ */
 // Function to populate the transactions list
 function updateTransactions() {
     const transactionList = document.getElementById("transaction-list");
@@ -62,11 +95,7 @@ function updateTransactions() {
 
 // Initialise all dynamic data on page load
 function initialiseDashboard() {
-    updateUsername();
     updateBalance();
-    updateSpendingLimit();
-    updateSavingsGrowth();
-    updateTransactions();
 }
 
 // Call initialiseDashboard to load data on page load

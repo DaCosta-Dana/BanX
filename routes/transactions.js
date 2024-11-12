@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Utilisateur = require('../models/utilisateur');
 
+
 // Route pour récupérer le solde d'un utilisateur
 router.get('/balance/:username', async (req, res) => {
   try {
