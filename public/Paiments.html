@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BanX Payments</title>
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>BanX</h2>
+            </div>
+            <nav>
+                <ul>
+                    <li>Dashboard</li>
+                    <li>My Account</li>
+                    <li class="active">Payments <span class="badge">5</span></li>
+                    <li>Analytics</li>
+                    <li>Calendar</li>
+                    <li>Support</li>
+                </ul>
+            </nav>
+            <div class="sidebar-bottom">
+                <div>Settings</div>
+                <div>Log out</div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main>
+            <section class="payments-section">
+                <h1>Payments</h1>
+
+                <!-- Balance Section -->
+                <div class="balance-section">
+                    <h2>Account Balance</h2>
+                    <p id="account-balance">$12,345.67</p>
+                </div>
+
+                <!-- New Transaction Button -->
+                <div class="transaction-button">
+                    <button onclick="showTransactionModal()">New Transaction</button>
+                </div>
+
+                <!-- Transaction History Table -->
+                <div class="transaction-history">
+                    <h2>Transaction History</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Comment</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transaction-data">
+                            <!-- Transaction rows will be inserted here dynamically -->
+                        </tbody>
+                    </table>
+                    <p id="no-transactions-message" style="display: none;">No transactions made.</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Transaction Modal -->
+        <div id="transaction-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5);">
+            <div style="position: absolute; top: 20%; left: 50%; transform: translate(-50%, -20%); background: white; padding: 20px; border-radius: 10px; width: 400px;">
+                <h2>New Transaction</h2>
+                <form id="transaction-step-form">
+                    <!-- Step 1: Choose Beneficiary -->
+                    <div id="step-1">
+                        <label for="beneficiary">Beneficiary:</label>
+                        <select id="beneficiary" required>
+                            <option value="">-- Select Beneficiary --</option>
+                            <option value="Alice">Alice</option>
+                            <option value="Bob">Bob</option>
+                            <option value="Charlie">Charlie</option>
+                        </select>
+                        <button type="button" onclick="nextStep(2)">Next</button>
+                    </div>
+
+                    <!-- Step 2: Enter Amount -->  <!-- needs to still check if the user has enough to do the transaction --> 
+                    <div id="step-2" style="display: none;">
+                        <label for="amount">Amount:</label>
+                        <input type="number" id="amount" step="0.01" required>
+                        <button type="button" onclick="previousStep(1)">Back</button>
+                        <button type="button" onclick="nextStep(3)">Next</button>
+                    </div>
+
+                    <!-- Step 3: Add Comment -->
+                    <div id="step-3" style="display: none;">
+                        <label for="comment">Add a Comment (Optional):</label>
+                        <textarea id="comment" rows="3"></textarea>
+                        <button type="button" onclick="previousStep(2)">Back</button>
+                        <button type="submit">Submit</button>
+                    </div>
+                </form>
+                <button onclick="hideTransactionModal()" style="margin-top: 20px;">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let transactions = [
+            { date: "2024-11-01", description: "Online Purchase",comment:"Amazon", amount: -120.00, status: "Completed" },
+            { date: "2024-11-05", description: "Salary Credit",comment:"EY Salary", amount: 2500.00, status: "Completed" }
+        ];
+
+        const transactionData = document.getElementById("transaction-data");
+        const noTransactionsMessage = document.getElementById("no-transactions-message");
+
+        // Render transactions
+        function renderTransactions() {
+            transactionData.innerHTML = "";
+            if (transactions.length === 0) {
+                noTransactionsMessage.style.display = "block";
+            } else {
+                noTransactionsMessage.style.display = "none";
+                transactions.forEach(transaction => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${transaction.date}</td>
+                        <td>${transaction.description}</td>
+                        <td>${transaction.amount < 0 ? "-" : ""}$${Math.abs(transaction.amount).toFixed(2)}</td>
+                        <td>${transaction.status}</td>
+                    `;
+                    transactionData.appendChild(row);
+                });
+            }
+        }
+
+        renderTransactions();
+
+        // Modal control
+        function showTransactionModal() {
+            document.getElementById("transaction-modal").style.display = "block";
+        }
+
+        function hideTransactionModal() {
+            document.getElementById("transaction-modal").style.display = "none";
+        }
+
+        // Form steps control
+        function nextStep(step) {
+            document.getElementById(`step-${step - 1}`).style.display = "none";
+            document.getElementById(`step-${step}`).style.display = "block";
+        }
+
+        function previousStep(step) {
+            document.getElementById(`step-${step + 1}`).style.display = "none";
+            document.getElementById(`step-${step}`).style.display = "block";
+        }
+
+        // Submit new transaction
+        document.getElementById("transaction-step-form").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const beneficiary = document.getElementById("beneficiary").value;
+            const amount = parseFloat(document.getElementById("amount").value);
+            const comment = document.getElementById("comment").value;
+
+            // Add new transaction
+            transactions.unshift({
+                date: new Date().toISOString().split('T')[0],
+                description: `Transfer to ${beneficiary} ${comment ? `- ${comment}` : ""}`,
+                amount: -amount,
+                status: "Completed"
+            });
+
+            // Hide modal and refresh transactions
+            hideTransactionModal();
+            renderTransactions();
+        });
+    </script>
+</body>
+
+</html>
