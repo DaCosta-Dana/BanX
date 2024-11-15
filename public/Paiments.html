@@ -5,6 +5,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BanX Payments</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            max-width: 400px;
+            margin: 20px auto;
+        }
+
+        .calendar div {
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .calendar .header {
+            font-weight: bold;
+            background-color: #f4f4f4;
+        }
+
+        .calendar .day {
+            cursor: pointer;
+        }
+
+        .calendar .current-day {
+            background-color: #ffc107;
+            font-weight: bold;
+        }
+
+        .calendar .recurring-payment {
+            background-color: #28a745;
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
@@ -105,8 +143,23 @@
                 <button onclick="hideTransactionModal()" style="margin-top: 20px;">Cancel</button>
             </div>
         </div>
-    </div>
 
+        <!-- Calendar Section -->
+        <div class="calendar-section">
+            <h2>Payment Calendar</h2>
+            <div class="calendar" id="payment-calendar">
+                <!-- Calendar will be dynamically generated -->
+            </div>
+        </div>
+
+        <!-- Upcoming Payments Section -->
+        <div class="upcoming-payments">
+            <h3>Upcoming Payments</h3>
+            <div id="upcoming-payments-list">
+                <!-- Upcoming payments will be dynamically generated -->
+            </div>
+        </div>
+    </div>
     <script>
         let transactions = [
             { date: "2024-11-01", description: "Online Purchase",comment:"Amazon", amount: -120.00, status: "Completed" },
@@ -178,6 +231,80 @@
             hideTransactionModal();
             renderTransactions();
         });
+
+        //CALENDAR 
+
+        // Simulate recurring payments
+        const recurringPayments = [
+            { day: 5, name: "Spotify", amount: 9.99 },
+            { day: 12, name: "Electricity Bill", amount: 50.0 },
+            { day: 20, name: "Netflix", amount: 19.99 },
+            { day: 25, name: "Gym Membership", amount: 35.0 }
+        ];
+        const today = new Date();
+
+        // Render calendar
+        function renderCalendar() {
+            const calendar = document.getElementById("payment-calendar");
+            calendar.innerHTML = ""; // Clear previous content
+
+            // Calendar header
+            const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+            daysOfWeek.forEach(day => {
+                const dayHeader = document.createElement("div");
+                dayHeader.classList.add("header");
+                dayHeader.textContent = day;
+                calendar.appendChild(dayHeader);
+            });
+
+            // Get current month and year
+            const year = today.getFullYear();
+            const month = today.getMonth();
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+            // Fill in blank days before the first day of the month
+            for (let i = 0; i < firstDay; i++) {
+                const blankDay = document.createElement("div");
+                calendar.appendChild(blankDay);
+            }
+
+            // Fill in days of the month
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayCell = document.createElement("div");
+                dayCell.classList.add("day");
+                dayCell.textContent = day;
+
+                // Highlight the current day
+                if (day === today.getDate()) {
+                    dayCell.classList.add("current-day");
+                }
+
+                // Highlight recurring payments
+                if (recurringPayments.some(payment => payment.day === day)) {
+                    dayCell.classList.add("recurring-payment");
+                }
+
+                calendar.appendChild(dayCell);
+            }
+        }
+
+        // Render upcoming payments
+        function renderUpcomingPayments() {
+            const upcomingPaymentsList = document.getElementById("upcoming-payments-list");
+            upcomingPaymentsList.innerHTML = ""; // Clear previous content
+
+            recurringPayments.forEach(payment => {
+                const paymentItem = document.createElement("div");
+                paymentItem.classList.add("upcoming-payment-item");
+                paymentItem.textContent = `${payment.name}: $${payment.amount.toFixed(2)} (Due on ${payment.day})`;
+                upcomingPaymentsList.appendChild(paymentItem);
+            });
+        }
+
+        // Initialize the page
+        renderCalendar();
+        renderUpcomingPayments();
     </script>
 </body>
 

@@ -4,8 +4,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BanX Homepage</title>
-    <link rel="stylesheet" href="CSS/homepage.css">
+    <title>BanX Analytics</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .sidebar {
+            width: 200px;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .chart-container {
+            margin: 20px 0;
+            max-width: 600px;
+            max-height: 400px;
+        }
+
+        .chart-container canvas {
+            display: block;
+            width: 100% !important;
+            height: auto !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -18,27 +51,101 @@
             </div>
             <nav>
                 <ul>
-                    <li class="active">Dashboard</li>
+                    <li>Dashboard</li>
                     <li>My Account</li>
-                    <li>Payments <span class="badge">5</span></li>
-                    <li>Analytics</li>
+                    <li>Payments</li>
+                    <li class="active">Analytics</li>
                     <li>Calendar</li>
                     <li>Support</li>
                 </ul>
             </nav>
-            <div class="sidebar-bottom">
-                <div>Settings</div>
-                <div>Log out</div>
-            </div>
         </aside>
 
-
         <!-- Main Content -->
-        <main>
-            
+        <main class="main-content">
+            <h1>Analytics</h1>
+
+            <!-- Spending by Category -->
+            <div class="chart-container">
+                <h2>Spending by Category</h2>
+                <canvas id="spendingCategoryChart"></canvas>
+            </div>
+
+            <!-- Spending Trend -->
+            <div class="chart-container">
+                <h2>Spending Trend (Last 6 Months)</h2>
+                <canvas id="spendingTrendChart"></canvas>
+            </div>
         </main>
     </div>
 
-    <!-- <script src="JS/homepage.js"></script> -->
+    <script>
+        // Data for Spending by Category
+        const spendingCategoryData = {
+            labels: ["Food", "Utilities", "Entertainment", "Transportation", "Others"],
+            datasets: [{
+                label: "Spending by Category",
+                data: [500, 300, 150, 200, 50],
+                backgroundColor: [
+                    "rgba(255, 99, 132, 0.5)",
+                    "rgba(54, 162, 235, 0.5)",
+                    "rgba(255, 206, 86, 0.5)",
+                    "rgba(75, 192, 192, 0.5)",
+                    "rgba(153, 102, 255, 0.5)"
+                ],
+                borderColor: [
+                    "rgba(255, 99, 132, 1)",
+                    "rgba(54, 162, 235, 1)",
+                    "rgba(255, 206, 86, 1)",
+                    "rgba(75, 192, 192, 1)",
+                    "rgba(153, 102, 255, 1)"
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        // Data for Spending Trend
+        const spendingTrendData = {
+            labels: ["June", "July", "August", "September", "October", "November"],
+            datasets: [{
+                label: "Spending Trend",
+                data: [2000, 1800, 2500, 2200, 2400, 2800],
+                backgroundColor: "rgba(75, 192, 192, 0.2)",
+                borderColor: "rgba(75, 192, 192, 1)",
+                borderWidth: 2,
+                fill: true
+            }]
+        };
+
+        // Chart.js Configuration
+        const options = {
+            responsive: false, // Disable responsiveness
+            maintainAspectRatio: false, // Prevent automatic resizing
+            plugins: {
+                legend: {
+                    position: "top"
+                }
+            }
+        };
+
+        // Render Charts
+        window.onload = () => {
+            const ctx1 = document.getElementById("spendingCategoryChart").getContext("2d");
+            const ctx2 = document.getElementById("spendingTrendChart").getContext("2d");
+
+            new Chart(ctx1, {
+                type: "pie",
+                data: spendingCategoryData,
+                options: options
+            });
+
+            new Chart(ctx2, {
+                type: "line",
+                data: spendingTrendData,
+                options: options
+            });
+        };
+    </script>
 </body>
+
 </html>
