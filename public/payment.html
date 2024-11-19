@@ -83,6 +83,7 @@
                 <!-- New Transaction Button -->
                 <div class="transaction-button">
                     <button onclick="showTransactionModal()">New Transaction</button>
+                    
                 </div>
 
                 <!-- Transaction History Table -->
@@ -131,6 +132,8 @@
                         <input type="number" id="amount" step="1" required>
                         
                         <button type="submit">Submit</button>
+                        <button onclick="showBeneficiaryModal()">Add Beneficiary</button>
+                        
                     </div>
                 </form>
                 <button onclick="hideTransactionModal()" style="margin-top: 20px;">Cancel</button>
@@ -138,21 +141,25 @@
         </div>
 
         <!-- Transaction Modal -->
-        <div id="beneficiary-model" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5);">
+        <!-- Add Beneficiary Button -->
+        
+
+        <!-- Beneficiary Modal -->
+        <div id="beneficiary-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5);">
             <div style="position: absolute; top: 20%; left: 50%; transform: translate(-50%, -20%); background: white; padding: 20px; border-radius: 10px; width: 400px;">
                 <h2>New Beneficiary</h2>
                 <form id="beneficiary-form">
-                    <div id="beneficiary">
-                      <label for="beneficiary-name">Beneficiary Name:</label>
-                      <textarea id="beneficiary-name" rows="1"></textarea>
-                      <label for="beneficiary-iban">Beneficiary IBAN:</label>
-                      <textarea id="beneficiary-iban" rows="1"></textarea>
-                      <button type="submit">Submit</button>
-                    </div>
-                  </form>
-                <button onclick="hideTransactionModal()" style="margin-top: 20px;">Cancel</button>
+                    <label for="beneficiary-name">Beneficiary Name:</label>
+                    <input type="text" id="beneficiary-name" required>
+                    <label for="beneficiary-iban">Beneficiary IBAN:</label>
+                    <input type="text" id="beneficiary-iban" required>
+                    <button type="submit">Submit</button>
+                </form>
+                <button onclick="hideBeneficiaryModal()" style="margin-top: 20px;">Cancel</button>
             </div>
         </div>
+
+        
 
         <!-- Calendar Section -->
         <div class="calendar-section">
