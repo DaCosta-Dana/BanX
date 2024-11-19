@@ -85,6 +85,25 @@ router.post('/addBeneficiary', async (req, res) => {
     }
 });
 
+router.get('/beneficiaries', async (req, res) => {
+  const username = req.session.username; // Assuming the username is stored in the session
+
+  try {
+      const user = await Utilisateur.findOne({ username });
+
+      if (!user) {
+          return res.status(404).json({ message: 'User not found' });
+      }
+
+      res.status(200).json({ beneficiaries: user.beneficiaries });
+  } catch (error) {
+      console.error('Error fetching beneficiaries:', error);
+      res.status(500).json({ message: 'An error occurred while fetching the beneficiaries' });
+  }
+});
+
+module.exports = router;
+
 module.exports = router;
 
 // Exporter le routeur

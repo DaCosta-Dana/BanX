@@ -106,6 +106,36 @@ document.getElementById("beneficiary-form").addEventListener("submit", async fun
     }
 });
 
+async function fetchBeneficiaries() {
+    try {
+        const response = await fetch('/utilisateurs/beneficiaries');
+        if (!response.ok) {
+            throw new Error('Failed to fetch beneficiaries');
+        }
+        const data = await response.json();
+        return data.beneficiaries;
+    } catch (error) {
+        console.error('Error fetching beneficiaries:', error);
+        return [];
+    }
+}
+
+async function populateBeneficiaryDropdown() {
+    const beneficiaries = await fetchBeneficiaries();
+    const beneficiaryDropdown = document.getElementById('beneficiary');
+    beneficiaryDropdown.innerHTML = '<option value="">-- Select Beneficiary --</option>'; // Clear existing options
+
+    beneficiaries.forEach(beneficiary => {
+        const option = document.createElement('option');
+        option.value = beneficiary.iban;
+        option.textContent = beneficiary.name;
+        beneficiaryDropdown.appendChild(option);
+    });
+}
+
+// Call the function to populate the dropdown on page load
+document.addEventListener('DOMContentLoaded', populateBeneficiaryDropdown);
+
 //CALENDAR 
 
 // Simulate recurring payments
