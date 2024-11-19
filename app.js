@@ -108,7 +108,6 @@ app.get('/utilisateurs/username', (req, res) => {
 });
 
 
-
 // Démarrer le serveur
 const port = 3000;
 app.listen(port, () => {

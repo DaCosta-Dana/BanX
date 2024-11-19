@@ -18,11 +18,10 @@
             </div>
             <nav>
                 <ul>
-                    <li class="active">Dashboard</li>
-                    <li>My Account</li>
-                    <li>Payments <span class="badge">5</span></li>
-                    <li>Analytics</li>
-                    <li>Calendar</li>
+                    <li><button onclick="redirectToDashboard()">Dashboard</button></li>
+                    <li><button onclick="redirectToMyAccount()">My Account</button></li>
+                    <li><button onclick="redirectToPayment()">Payments</button></li>
+                    <li><button onclick="redirectToAnalytics()">Analytics</button></li>
                     <li>Support</li>
                 </ul>
             </nav>
@@ -53,7 +52,7 @@
                         <div class="progress" id="spending-progress" style="width: 0%;"></div>
                     </div>
                     <p id="spending-limit-info">€0 out of €1,000</p>
-                    <button class="transfer-button">Transfer</button>
+                   
                 </div>
 
                 <div class="money-flow">

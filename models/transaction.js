@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
 
 const transactionSchema = new mongoose.Schema({
+  sender: {
+    type: mongoose.Schema.Types.username,
+    ref: 'Utilisateur',
+    required: true,
+    unique: true
+  },
   transactionName: {
     type: String,
     required: true,
@@ -11,8 +17,8 @@ const transactionSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
-  account: {
-    type: mongoose.Schema.Types.ObjectId,
+  beneficiary: {
+    type: mongoose.Schema.Types.iban,
     ref: 'Utilisateur',
     required: true,
     unique: true
@@ -21,9 +27,11 @@ const transactionSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  status: { 
-    type: Number, 
-    default: 0 }
+  category: {
+    type: String,
+    required: true
+  },
+
 });
 
 const Transaction = mongoose.model('Transaction', transactionSchema);

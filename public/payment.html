@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BanX Payments</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            max-width: 400px;
+            margin: 20px auto;
+        }
+
+        .calendar div {
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .calendar .header {
+            font-weight: bold;
+            background-color: #f4f4f4;
+        }
+
+        .calendar .day {
+            cursor: pointer;
+        }
+
+        .calendar .current-day {
+            background-color: #ffc107;
+            font-weight: bold;
+        }
+
+        .calendar .recurring-payment {
+            background-color: #28a745;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>BanX</h2>
+            </div>
+            <nav>
+                <ul>
+                    <li><button onclick="redirectToDashboard()">Dashboard</button></li>
+                    <li><button onclick="redirectToMyAccount()">My Account</button></li>
+                    <li><button onclick="redirectToPayment()">Payments</button></li>
+                    <li><button onclick="redirectToAnalytics()">Analytics</button></li>
+                    <li>Support</li>
+                </ul>
+            </nav>
+            <div class="sidebar-bottom">
+                <div>Settings</div>
+                <div>Log out</div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main>
+            <section class="payments-section">
+                <h1>Payments</h1>
+
+                <!-- Balance Section -->
+                <div class="balance-section">
+                    <h2>Account Balance</h2>
+                    <p id="account-balance">$12,345.67</p>
+                </div>
+
+                <!-- New Transaction Button -->
+                <div class="transaction-button">
+                    <button onclick="showTransactionModal()">New Transaction</button>
+                </div>
+
+                <!-- Transaction History Table -->
+                <div class="transaction-history">
+                    <h2>Transaction History</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Comment</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transaction-data">
+                            <!-- Transaction rows will be inserted here dynamically -->
+                        </tbody>
+                    </table>
+                    <p id="no-transactions-message" style="display: none;">No transactions made.</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Transaction Modal -->
+        <div id="transaction-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5);">
+            <div style="position: absolute; top: 20%; left: 50%; transform: translate(-50%, -20%); background: white; padding: 20px; border-radius: 10px; width: 400px;">
+                <h2>New Transaction</h2>
+                <form id="transaction-step-form">
+                   
+                    <div id="transaction">
+
+                        <label for="comment">Transaction Name:</label>
+                        <textarea id="comment" rows="1"></textarea>
+
+                        <label for="beneficiary">Beneficiary:</label>
+                        <select id="beneficiary" required>
+                            <option value="">-- Select Beneficiary --</option>
+                            <option value="Alice">Alice</option>
+                            <option value="Bob">Bob</option>
+                            <option value="Charlie">Charlie</option>
+                        </select>
+            
+                        <label for="amount">Amount:</label>
+
+                        <input type="number" id="amount" step="1" required>
+                        
+                        <button type="submit">Submit</button>
+                    </div>
+                </form>
+                <button onclick="hideTransactionModal()" style="margin-top: 20px;">Cancel</button>
+            </div>
+        </div>
+
+        <!-- Transaction Modal -->
+        <div id="beneficiary-model" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5);">
+            <div style="position: absolute; top: 20%; left: 50%; transform: translate(-50%, -20%); background: white; padding: 20px; border-radius: 10px; width: 400px;">
+                <h2>New Beneficiary</h2>
+                <form id="beneficiary-form">
+                    <div id="beneficiary">
+                      <label for="beneficiary-name">Beneficiary Name:</label>
+                      <textarea id="beneficiary-name" rows="1"></textarea>
+                      <label for="beneficiary-iban">Beneficiary IBAN:</label>
+                      <textarea id="beneficiary-iban" rows="1"></textarea>
+                      <button type="submit">Submit</button>
+                    </div>
+                  </form>
+                <button onclick="hideTransactionModal()" style="margin-top: 20px;">Cancel</button>
+            </div>
+        </div>
+
+        <!-- Calendar Section -->
+        <div class="calendar-section">
+            <h2>Payment Calendar</h2>
+            <div class="calendar" id="payment-calendar">
+                <!-- Calendar will be dynamically generated -->
+            </div>
+        </div>
+
+        <!-- Upcoming Payments Section -->
+        <div class="upcoming-payments">
+            <h3>Upcoming Payments</h3>
+            <div id="upcoming-payments-list">
+                <!-- Upcoming payments will be dynamically generated -->
+            </div>
+        </div>
+    </div>
+
+    <script src="JS/payment.js"></script>
+    <script src="JS/homepage.js"></script>
+</body>
+
+</html>

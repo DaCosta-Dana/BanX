@@ -42,7 +42,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
   });
 
   if (response.ok) {
-    alert('Connexion réussie');
+    
     // Redirect to another page or perform additional actions
     window.location.href = '/homepage.html'; // Example redirection
   } else {
