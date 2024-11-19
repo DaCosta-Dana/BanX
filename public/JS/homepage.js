@@ -1,16 +1,27 @@
-// Function to update the username
-/* 
-function updateUsername() {
-    document.getElementById("username").textContent = sampleData.username;
+
+function redirectToPayment() {
+    window.location.href = "payment.html";
 }
 
-// Function to update the balance
-function updateBalance() {
-    const balanceElement = document.getElementById("total-balance");
-    balanceElement.textContent = `€${sampleData.balance.toFixed(2)}`;
+function redirectToDashboard() {
+    window.location.href = "homepage.html";
 }
 
- */
+function redirectToAnalytics() {
+    window.location.href = "analytics.html";
+}
+
+function redirectToMyAccount() {
+    window.location.href = "myAccount.html";
+}
+
+
+async function updateUsername() {
+    const username = await fetchUsername();
+    const usernameElement = document.getElementById("username")
+    usernameElement.textContent = username;
+}
+
 async function fetchUsername() {
     try {
         const response = await fetch('/utilisateurs/username');
@@ -18,7 +29,6 @@ async function fetchUsername() {
             throw new Error('Failed to fetch username');
         }
         const data = await response.json();
-        alert(data.username);
         return data.username;
     } catch (error) {
         console.error('Error fetching username:', error);
@@ -43,7 +53,7 @@ async function fetchBalance(username) {
         return data.balance;
     } catch (error) {
         console.error('Error fetching balance:', error);
-        return 1293439200;
+        return 0;
     }
 }
 
@@ -56,25 +66,7 @@ async function updateBalance() {
     balanceElement.textContent = `€${balance.toFixed(2)}`;
 }
 
-/*  
-// Function to update the spending limit
-function updateSpendingLimit() {
-    const spendingLimitInfo = document.getElementById("spending-limit-info");
-    const spendingProgress = document.getElementById("spending-progress");
 
-    // Calculate percentage
-    const percentage = (sampleData.spending.current / sampleData.spending.limit) * 100;
-    spendingLimitInfo.textContent = `€${sampleData.spending.current.toFixed(2)} out of €${sampleData.spending.limit.toFixed(2)}`;
-    spendingProgress.style.width = `${percentage}%`;
-}
-
-// Function to update the savings growth
-
-function updateSavingsGrowth() {
-    const growthElement = document.getElementById("savings-growth");
-    growthElement.textContent = `+${sampleData.savingsGrowth.toFixed(2)}%`;
-}
- */
 // Function to populate the transactions list
 function updateTransactions() {
     const transactionList = document.getElementById("transaction-list");
@@ -96,6 +88,7 @@ function updateTransactions() {
 // Initialise all dynamic data on page load
 function initialiseDashboard() {
     updateBalance();
+    updateUsername();
 }
 
 // Call initialiseDashboard to load data on page load
