@@ -71,6 +71,41 @@ document.getElementById("transaction-step-form").addEventListener("submit", func
     renderTransactions();
 });
 
+function showBeneficiaryModal() {
+    document.getElementById("beneficiary-modal").style.display = "block";
+}
+
+function hideBeneficiaryModal() {
+    document.getElementById("beneficiary-modal").style.display = "none";
+}
+
+document.getElementById("beneficiary-form").addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const name = document.getElementById("beneficiary-name").value;
+    const iban = document.getElementById("beneficiary-iban").value;
+
+    try {
+        const response = await fetch('/utilisateurs/addBeneficiary', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name, iban })
+        });
+
+        if (response.ok) {
+            alert('Beneficiary added successfully');
+            hideBeneficiaryModal();
+        } else {
+            alert('Failed to add beneficiary');
+        }
+    } catch (error) {
+        console.error('Error adding beneficiary:', error);
+        alert('An error occurred while adding the beneficiary');
+    }
+});
+
 //CALENDAR 
 
 // Simulate recurring payments

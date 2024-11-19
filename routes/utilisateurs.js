@@ -62,5 +62,30 @@ router.get('/balance/:username', async (req, res) => {
   }
 });
 
+// Add Beneficiary Route
+router.post('/addBeneficiary', async (req, res) => {
+    const { name, iban } = req.body;
+    const username = req.session.username; // Assuming the username is stored in the session
+
+    try {
+        const user = await Utilisateur.findOne({ username });
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        user.beneficiaries = user.beneficiaries || [];
+        user.beneficiaries.push({ name, iban });
+
+        await user.save();
+        res.status(200).json({ message: 'Beneficiary added successfully' });
+    } catch (error) {
+        console.error('Error adding beneficiary:', error);
+        res.status(500).json({ message: 'An error occurred while adding the beneficiary' });
+    }
+});
+
+module.exports = router;
+
 // Exporter le routeur
 module.exports = router;

@@ -1,4 +1,9 @@
 // models/utilisateur.js
+
+function generateRandomIban() {
+  return 'BX' + Math.floor(1000000000 + Math.random() * 9000000000).toString();
+}
+
 const mongoose = require('mongoose');
 
 const utilisateurSchema = new mongoose.Schema({
@@ -23,7 +28,17 @@ const utilisateurSchema = new mongoose.Schema({
   },
   balance: { 
     type: Number, 
-    default: 100 }
+    default: 100 
+  },
+  iban: {
+    type: String,
+    required: true,
+    default: generateRandomIban
+  },
+  beneficiaries: [{
+    name: String,
+    iban: String
+  }]
 });
 
 const Utilisateur = mongoose.model('Utilisateur', utilisateurSchema);
