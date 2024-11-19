@@ -23,7 +23,7 @@ const utilisateurSchema = new mongoose.Schema({
   },
   balance: { 
     type: Number, 
-    default: 0 }
+    default: 100 }
 });
 
 const Utilisateur = mongoose.model('Utilisateur', utilisateurSchema);

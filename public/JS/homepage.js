@@ -49,7 +49,7 @@ async function fetchBalance(username) {
         }
         const data = await response.json();
         console.log('Response data:', data);
-        alert(data);
+        
         return data.balance;
     } catch (error) {
         console.error('Error fetching balance:', error);
@@ -62,7 +62,6 @@ async function updateBalance() {
     const username = await fetchUsername();
     const balance = await fetchBalance(username);
     const balanceElement = document.getElementById("total-balance");
-    alert(balance);
     balanceElement.textContent = `€${balance.toFixed(2)}`;
 }
 
