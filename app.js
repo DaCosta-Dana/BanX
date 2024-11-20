@@ -7,7 +7,6 @@ const session = require('express-session');
 // Creation d'une instance de Express app
 const app = express();
 
-
 // URL de connexion à MongoDB
 const mongoURI = "mongodb+srv://erwanweinmann:eweinmann@cluster0.wyyff.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
@@ -16,13 +15,11 @@ mongoose.connect(mongoURI)
   .then(() => console.log('Connexion à MongoDB réussie'))
   .catch((err) => console.error('Erreur de connexion à MongoDB :', err));
 
-
 // Middleware pour analyser le corps de la requête en JSON
 app.use(express.json());
 
 // Middleware pour servir des fichiers statiques (si fichier demandé, Express cherchera dans public)
 app.use(express.static('public'));
-
 
 app.use(session({
   secret: 'your-secret-key',
@@ -33,26 +30,18 @@ app.use(session({
 
 // Importer les routes
 const utilisateursRoutes = require('./routes/utilisateurs');
-const transactionsRoutes = require('./routes/transactions');
-
-/* Indique a l'app d'utiliser les routes importées pour le préfixe /utilisateurs. 
-Par exemple, si une requête est faite à /utilisateurs, les routes définies dans 'utilisateursRoutes' seront utilisées. */
-
 app.use('/utilisateurs', utilisateursRoutes);
-app.use('/transactions', transactionsRoutes);
+
+const transactionsRouter = require('./routes/transactions');
+app.use('/transactions', transactionsRouter);
 
 // Gère les requètes GET a la racine. Lorqu'un user se connecte, il est redirigé vers la page d'accueil.
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/public/login.html');
 });
 
-/* Définit une route pour gérer les requêtes POST à /signup. 
-La fonction est asynchrone, ce qui permet d'utiliser await pour les 
-opérations qui prennent du temps, comme l'accès à la base de données. */
-
+// Définit une route pour gérer les requêtes POST à /signup.
 app.post('/signup', async (req, res) => {
-
-  // Infos extraites du corps de la requete
   const { username, email, password, phone } = req.body;
 
   if (!username || !email || !password || !phone) {
@@ -60,11 +49,9 @@ app.post('/signup', async (req, res) => {
   }
 
   try {
-    // Créer un nouvel utilisateur
     const nouvelUtilisateur = new Utilisateur({ username, email, password, phone });
     await nouvelUtilisateur.save();
     res.status(201).send({ message: 'Inscription réussie' });
-    
   } catch (err) {
     console.error(err);
     res.status(400).send({ message: 'Erreur lors de l\'inscription' });
@@ -80,13 +67,11 @@ app.post('/login', async (req, res) => {
   }
 
   try {
-    // Trouver l'utilisateur par nom d'utilisateur
     const utilisateur = await Utilisateur.findOne({ username });
     if (!utilisateur) {
       return res.status(400).send({ message: 'Utilisateur non trouvé.' });
     }
 
-    // Comparer directement les mots de passe
     if (utilisateur.password !== password) {
       return res.status(400).send({ message: 'Mot de passe incorrect.' });
     }
@@ -106,8 +91,6 @@ app.get('/utilisateurs/username', (req, res) => {
     res.status(401).send('Unauthorized');
   }
 });
-
-
 
 // Démarrer le serveur
 const port = 3000;

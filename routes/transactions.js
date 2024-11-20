@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Utilisateur = require('../models/utilisateur');
+const Transaction = require('../models/transaction');
 
 
 // Route pour récupérer le solde d'un utilisateur
@@ -16,48 +17,49 @@ router.get('/balance/:username', async (req, res) => {
   }
 });
 
-// Route pour transférer des fonds d'un utilisateur à un autre
-router.post('/transfer', async (req, res) => {
-  const { senderUsername, receiverUsername, amount } = req.body;
-
-  if (!senderUsername || !receiverUsername || amount <= 0) {
-    return res.status(400).json({ message: 'Données invalides pour le transfert.' });
-  }
+// Route to add a new transaction
+router.post('/addTransaction', async (req, res) => {
+  console.log('Received request to add transaction');
+  const { transactionName, date, beneficiary_username, amount, category } = req.body;
+  console.log('Request body:', req.body);
+  const sender_username = req.session.username; // Assuming the username is stored in the session
+  console.log('Sender username from session:', sender_username);
 
   try {
-    // Début de la transaction
-    const session = await mongoose.startSession();
-    session.startTransaction();
+      const sender = await Utilisateur.findOne({ username: sender_username });
+      console.log('Sender found:', sender);
+      const beneficiary = await Utilisateur.findOne({ iban: beneficiary_username });
+      console.log('Sender found:', beneficiary);
+     
+      if (!sender || !beneficiary_username) {
+          console.log('Sender or Beneficiary not found');
+          return res.status(404).json({ message: 'Sender or Beneficiary not found' });
+      }
 
-    const sender = await Utilisateur.findOne({ username: senderUsername }).session(session);
-    const receiver = await Utilisateur.findOne({ username: receiverUsername }).session(session);
+      const newTransaction = new Transaction({
+          transactionName,
+          date,
+          sender_account: sender.username,
+          beneficiary_account: beneficiary.username,
+          amount,
+          category,
+      });
+      console.log('New transaction object:', newTransaction);
 
-    if (!sender || !receiver) {
-      await session.abortTransaction();
-      session.endSession();
-      return res.status(404).json({ message: 'L\'utilisateur émetteur ou récepteur est introuvable.' });
-    }
+      await newTransaction.save();
+      console.log('Transaction saved successfully');
 
-    if (sender.balance < amount) {
-      await session.abortTransaction();
-      session.endSession();
-      return res.status(400).json({ message: 'Solde insuffisant pour le transfert.' });
-    }
+      sender.balance -= amount;
+      beneficiary.balance += amount;
 
-    // Mise à jour des soldes des utilisateurs
-    sender.balance -= amount;
-    receiver.balance += amount;
+      // Save the updated users
+      await sender.save();
+      await beneficiary.save();
 
-    await sender.save({ session });
-    await receiver.save({ session });
-
-    // Validation de la transaction
-    await session.commitTransaction();
-    session.endSession();
-
-    res.status(200).json({ message: 'Transfert réussi.' });
-  } catch (err) {
-    res.status(500).json({ message: 'Erreur lors du transfert.' });
+      res.status(200).json({ message: 'Transaction added successfully' });
+  } catch (error) {
+      console.error('Error adding transaction:', error);
+      res.status(500).json({ message: 'An error occurred while adding the transaction' });
   }
 });
 

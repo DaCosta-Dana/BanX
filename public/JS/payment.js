@@ -50,25 +50,36 @@ function previousStep(step) {
     document.getElementById(`step-${step}`).style.display = "block";
 }
 
-// Submit new transaction
-document.getElementById("transaction-step-form").addEventListener("submit", function (event) {
+document.getElementById("transaction-modal").addEventListener("submit", async function(event) {
     event.preventDefault();
 
-    const beneficiary = document.getElementById("beneficiary").value;
-    const amount = parseFloat(document.getElementById("amount").value);
-    const comment = document.getElementById("comment").value;
+    const transactionName = document.getElementById("comment").value;
+    const beneficiary_username = document.getElementById("beneficiary").value;
+    alert(beneficiary_username);
+    const amount = document.getElementById("amount").value;
+    const category = document.getElementById("category").value || 'Uncategorized';
+    const date = new Date().toISOString(); // Use current date for simplicity
 
-    // Add new transaction
-    transactions.unshift({
-        date: new Date().toISOString().split('T')[0],
-        description: `Transfer to ${beneficiary} ${comment ? `- ${comment}` : ""}`,
-        amount: -amount,
-        status: "Completed"
-    });
-
-    // Hide modal and refresh transactions
-    hideTransactionModal();
-    renderTransactions();
+    try {
+        const response = await fetch('/transactions/addTransaction', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ transactionName, date, beneficiary_username, amount, category })
+        });
+        alert("Test");
+        if (response.ok) {
+            alert('Transaction added successfully');
+            hideTransactionModal();
+            // Optionally, refresh the transaction list or update the UI
+        } else {
+            alert('Failed to add transaction');
+        }
+    } catch (error) {
+        console.error('Error adding transaction:', error);
+        alert('An error occurred while adding the transaction');
+    }
 });
 
 function showBeneficiaryModal() {

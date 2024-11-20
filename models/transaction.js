@@ -4,26 +4,32 @@ const transactionSchema = new mongoose.Schema({
   transactionName: {
     type: String,
     required: true,
-    unique: true
+    unique: false
   },
   date: {
     type: Date,
     required: true,
-    unique: true
+    unique: false
   },
-  account: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Utilisateur',
+  sender_account: {
+    type: String,
     required: true,
-    unique: true
+    unique: false
   },
-  ammount: {
+  beneficiary_account: {
+    type: String,
+    required: true,
+    unique: false
+  },
+  amount: {
     type: Number,
     required: true
   },
-  status: { 
-    type: Number, 
-    default: 0 }
+  category: {
+    type: String,
+    required: true,
+    default: 'Uncategorized'
+  },
 });
 
 const Transaction = mongoose.model('Transaction', transactionSchema);
