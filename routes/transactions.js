@@ -50,7 +50,7 @@ router.post('/addTransaction', async (req, res) => {
       console.log('Transaction saved successfully');
 
       sender.balance -= amount;
-      beneficiary.balance += amount;
+      beneficiary.balance += parseFloat(amount);
 
       // Save the updated users
       await sender.save();
