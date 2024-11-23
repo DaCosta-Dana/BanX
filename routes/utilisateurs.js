@@ -109,8 +109,3 @@ router.get('/categories', (req, res) => {
 });
 
 module.exports = router;
-
-module.exports = router;
-
-// Exporter le routeur
-module.exports = router;

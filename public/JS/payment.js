@@ -54,7 +54,6 @@ document.getElementById("transaction-modal").addEventListener("submit", async fu
 
     const transactionName = document.getElementById("comment").value;
     const beneficiary_username = document.getElementById("beneficiary").value;
-    alert(beneficiary_username);
     const amount = document.getElementById("amount").value;
     const category = document.getElementById("category").value || 'Uncategorized';
     const date = new Date().toISOString(); // Use current date for simplicity
@@ -67,7 +66,7 @@ document.getElementById("transaction-modal").addEventListener("submit", async fu
             },
             body: JSON.stringify({ transactionName, date, beneficiary_username, amount, category })
         });
-        alert("Test");
+
         if (response.ok) {
             alert('Transaction added successfully');
             hideTransactionModal();

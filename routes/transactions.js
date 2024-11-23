@@ -73,14 +73,12 @@ router.get('/userTransactions/:username', async (req, res) => {
   }
 });
 
-// Route to fetch spending by category
+// Route to fetch spending by category for a user
 router.get('/spendingByCategory/:username', async (req, res) => {
   try {
     const transactions = await Transaction.find({ sender_account: req.params.username });
     const spendingByCategory = transactions.reduce((acc, transaction) => {
-      if (transaction.amount < 0) {
-        acc[transaction.category] = (acc[transaction.category] || 0) + Math.abs(transaction.amount);
-      }
+      acc[transaction.category] = (acc[transaction.category] || 0) + transaction.amount;
       return acc;
     }, {});
     res.status(200).json(spendingByCategory);
