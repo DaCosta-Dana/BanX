@@ -102,6 +102,12 @@ router.get('/beneficiaries', async (req, res) => {
   }
 });
 
+// Route pour récupérer les catégories disponibles
+router.get('/categories', (req, res) => {
+  const categories = ['Food', 'Transport', 'Savings', 'Entertainment', 'Utilities', 'Uncategorized'];
+  res.status(200).json({ categories });
+});
+
 module.exports = router;
 
 module.exports = router;

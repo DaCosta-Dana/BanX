@@ -1,4 +1,3 @@
-
 let transactions = [
     { date: "2024-11-01", description: "Online Purchase",comment:"Amazon", amount: -120.00, status: "Completed" },
     { date: "2024-11-05", description: "Salary Credit",comment:"EY Salary", amount: 5500.00, status: "Completed" }
@@ -146,6 +145,36 @@ async function populateBeneficiaryDropdown() {
 
 // Call the function to populate the dropdown on page load
 document.addEventListener('DOMContentLoaded', populateBeneficiaryDropdown);
+
+async function fetchCategories() {
+    try {
+        const response = await fetch('/utilisateurs/categories');
+        if (!response.ok) {
+            throw new Error('Failed to fetch categories');
+        }
+        const data = await response.json();
+        return data.categories;
+    } catch (error) {
+        console.error('Error fetching categories:', error);
+        return [];
+    }
+}
+
+async function populateCategoryDropdown() {
+    const categories = await fetchCategories();
+    const categoryDropdown = document.getElementById('category');
+    categoryDropdown.innerHTML = '<option value="">-- Select Category --</option>'; // Clear existing options
+
+    categories.forEach(category => {
+        const option = document.createElement('option');
+        option.value = category;
+        option.textContent = category;
+        categoryDropdown.appendChild(option);
+    });
+}
+
+// Call the function to populate the category dropdown on page load
+document.addEventListener('DOMContentLoaded', populateCategoryDropdown);
 
 //CALENDAR 
 

@@ -127,7 +127,9 @@
                         <input type="number" id="amount" step="1" required>
                         
                         <label for="category">Category:</label>
-                        <input type="text" id="category" name="category">
+                        <select id="category" name="category" required>
+                            <option value="">-- Select Category --</option>
+                        </select>
                         
                         <button type="submit">Submit</button>
                         <button onclick="showBeneficiaryModal()">Add Beneficiary</button>

@@ -1,4 +1,3 @@
-
 function redirectToPayment() {
     window.location.href = "payment.html";
 }
@@ -65,20 +64,44 @@ async function updateBalance() {
     balanceElement.textContent = `€${balance.toFixed(2)}`;
 }
 
+async function fetchTransactions(username) {
+    try {
+        const response = await fetch(`/transactions/userTransactions/${username}`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch transactions');
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching transactions:', error);
+        return [];
+    }
+}
 
-// Function to populate the transactions list
-function updateTransactions() {
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+}
+
+async function updateTransactions() {
+    const username = await fetchUsername();
+    const transactions = await fetchTransactions(username);
     const transactionList = document.getElementById("transaction-list");
     transactionList.innerHTML = ""; // Clear existing transactions
 
-    sampleData.transactions.forEach(transaction => {
+    // Sort transactions by date in descending order
+    transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    transactions.forEach(transaction => {
         const transactionItem = document.createElement("li");
         transactionItem.innerHTML = `
-            <span>${transaction.name}</span>
-            <span>${transaction.date}</span>
-            <span>${transaction.account}</span>
+            <span>${transaction.transactionName}</span>
+            <span>${formatDate(transaction.date)}</span>
+            <span>${transaction.beneficiary_account}</span>
             <span>€${transaction.amount.toFixed(2)}</span>
-            <span class="status ${transaction.status.toLowerCase()}">${transaction.status}</span>
+            <span class="status">${transaction.category}</span>
         `;
         transactionList.appendChild(transactionItem);
     });
@@ -88,6 +111,7 @@ function updateTransactions() {
 function initialiseDashboard() {
     updateBalance();
     updateUsername();
+    updateTransactions();
 }
 
 // Call initialiseDashboard to load data on page load

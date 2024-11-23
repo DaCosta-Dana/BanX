@@ -63,4 +63,30 @@ router.post('/addTransaction', async (req, res) => {
   }
 });
 
+// Route to fetch transactions for a user
+router.get('/userTransactions/:username', async (req, res) => {
+  try {
+    const transactions = await Transaction.find({ sender_account: req.params.username });
+    res.status(200).json(transactions);
+  } catch (err) {
+    res.status(500).json({ message: 'Error fetching transactions' });
+  }
+});
+
+// Route to fetch spending by category
+router.get('/spendingByCategory/:username', async (req, res) => {
+  try {
+    const transactions = await Transaction.find({ sender_account: req.params.username });
+    const spendingByCategory = transactions.reduce((acc, transaction) => {
+      if (transaction.amount < 0) {
+        acc[transaction.category] = (acc[transaction.category] || 0) + Math.abs(transaction.amount);
+      }
+      return acc;
+    }, {});
+    res.status(200).json(spendingByCategory);
+  } catch (err) {
+    res.status(500).json({ message: 'Error fetching spending by category' });
+  }
+});
+
 module.exports = router;
