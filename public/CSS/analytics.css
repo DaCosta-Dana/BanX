@@ -6,16 +6,53 @@
 .main-content {
     flex: 1;
     padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+header h1 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Charts Row Styling */
+.charts-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap; /* Stack charts on smaller screens */
+}
+
+/* Individual Chart Container */
 .chart-container {
-    margin: 20px 0;
-    max-width: 600px;
-    max-height: 400px;
+    flex: 1;
+    max-width: 48%; /* Each chart takes ~half the width */
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle card shadow */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.chart-container h2 {
+    font-size: 20px;
+    color: #555;
+    margin-bottom: 15px;
 }
 
 .chart-container canvas {
     display: block;
     width: 100% !important;
     height: auto !important;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .chart-container {
+        max-width: 100%; /* Full width on smaller screens */
+    }
 }

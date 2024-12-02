@@ -98,19 +98,22 @@ header {
 .profile {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 20px;
 }
 
 .profile-name {
     margin-right: 10px;
+    font-size: 16px;
+    color: #333;
 }
 
 .profile-pic {
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%; /* Makes the image circular */
     border: 2px solid #E9876A; /* Adds a 2px solid border with the primary color */
     padding: 2px; /* Optional: Adds space between the border and the image */
-
 }
 
 /* ============Account Balance========== */
