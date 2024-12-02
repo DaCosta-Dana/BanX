@@ -67,12 +67,6 @@ main {
     margin-bottom: 10px;
 }
 
-#account-balance {
-    font-size: 28px;
-    font-weight: bold;
-    color: #61BB84;
-}
-
 .transaction-button {
     display: flex;
     justify-content: flex-end;

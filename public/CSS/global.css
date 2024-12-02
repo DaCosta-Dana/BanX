@@ -112,3 +112,11 @@ header {
     padding: 2px; /* Optional: Adds space between the border and the image */
 
 }
+
+/* ============Transaction========== */
+
+.account-balance {
+    font-size: 36px;
+    color: #61BB84;
+    margin: 10px 0;
+}

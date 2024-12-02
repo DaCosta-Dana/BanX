@@ -21,12 +21,6 @@ main {
     border-radius: 10px;
 }
 
-.amount {
-    font-size: 36px;
-    color: #61BB84;
-    margin: 10px 0;
-}
-
 .spending-limit {
     font-size: 14px;
     color: #777;
