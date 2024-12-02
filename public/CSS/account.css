@@ -4,14 +4,6 @@
     flex-direction: row;
 }
 
-/* Main content layout */
-main {
-    padding: 20px;
-    min-height: 100vh;
-    overflow-y: auto;
-    flex: 1; /* This lets main take up remaining space */
-}
-
 /* Account overview section */
 .account-overview h1 {
     font-size: 28px;

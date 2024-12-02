@@ -28,13 +28,6 @@
     flex-direction: row;
 }
 
-main {
-    padding: 20px;
-    flex: 1;
-    height: 100vh;
-    overflow-y: auto;
-}
-
 /* Payments Section */
 .payments-section {
     max-width: 1200px;
