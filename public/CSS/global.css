@@ -105,7 +105,10 @@ header {
 }
 
 .profile-pic {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%; /* Makes the image circular */
+    border: 2px solid #E9876A; /* Adds a 2px solid border with the primary color */
+    padding: 2px; /* Optional: Adds space between the border and the image */
+
 }
