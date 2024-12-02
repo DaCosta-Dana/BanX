@@ -37,19 +37,19 @@
 
         <!-- Main Content -->
         <main>
-            <section class="payments-section">
+            <!-- Payments Section -->
+            <section class="payments-section box-shadow">
                 <h1>Payments</h1>
 
                 <!-- Balance Section -->
-                <div class="balance-section">
+                <div class="balance-section background-light">
                     <h2>Account Balance</h2>
                     <p id="account-balance">$12,345.67</p>
                 </div>
 
                 <!-- New Transaction Button -->
                 <div class="transaction-button">
-                    <button onclick="showTransactionModal()">New Transaction</button>
-                    
+                    <button class="button" onclick="showTransactionModal()">New Transaction</button>
                 </div>
 
                 <!-- Transaction History Table -->
@@ -66,83 +66,77 @@
                             </tr>
                         </thead>
                         <tbody id="transaction-data">
-                            <!-- Transaction rows will be inserted here dynamically -->
+                            <!-- Transaction rows will be inserted dynamically -->
                         </tbody>
                     </table>
-                    <p id="no-transactions-message" style="display: none;">No transactions made.</p>
+                    <p id="no-transactions-message" class="no-data-message" style="display: none;">No transactions made.</p>
+                </div>
+            </section>
+
+            <!-- Calendar Section -->
+            <section class="calendar-section box-shadow">
+                <h2>Payment Calendar</h2>
+                <div class="calendar" id="payment-calendar">
+                    <!-- Calendar will be dynamically generated -->
+                </div>
+            </section>
+
+            <!-- Upcoming Payments Section -->
+            <section class="upcoming-payments background-light box-shadow">
+                <h3>Upcoming Payments</h3>
+                <div id="upcoming-payments-list">
+                    <!-- Upcoming payments will be dynamically generated -->
                 </div>
             </section>
         </main>
+    </div>
 
-        <!-- Transaction Modal -->
-        <div id="transaction-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5);">
-            <div style="position: absolute; top: 20%; left: 50%; transform: translate(-50%, -20%); background: white; padding: 20px; border-radius: 10px; width: 400px;">
-                <h2>New Transaction</h2>
-                <form id="transaction-step-form">
-                   
-                    <div id="transaction">
+    <!-- Transaction Modal -->
+    <div id="transaction-modal" class="modal">
+        <div class="modal-content">
+            <h2>New Transaction</h2>
+            <form id="transaction-step-form">
+                <div id="transaction">
+                    <label for="comment">Transaction Name:</label>
+                    <textarea id="comment" rows="1" placeholder="Enter transaction name"></textarea>
 
-                        <label for="comment">Transaction Name:</label>
-                        <textarea id="comment" rows="1"></textarea>
+                    <label for="beneficiary">Beneficiary:</label>
+                    <select id="beneficiary" required>
+                        <option value="">-- Select Beneficiary --</option>
+                    </select>
 
-                        <label for="beneficiary">Beneficiary:</label>
-                        <select id="beneficiary" required>
-                            <option value="">-- Select Beneficiary --</option>
-                        </select>
-            
-                        <label for="amount">Amount:</label>
-                        <input type="number" id="amount" step="1" required>
-                        
-                        <label for="category">Category:</label>
-                        <select id="category" name="category" required>
-                            <option value="">-- Select Category --</option>
-                        </select>
-                        
-                        <button type="submit">Submit</button>
-                        <button onclick="showBeneficiaryModal()">Add Beneficiary</button>
-                        
+                    <label for="amount">Amount:</label>
+                    <input type="number" id="amount" step="1" placeholder="Enter amount" required>
+
+                    <label for="category">Category:</label>
+                    <select id="category" name="category" required>
+                        <option value="">-- Select Category --</option>
+                    </select>
+
+                    <div class="form-buttons">
+                        <button class="button" type="submit">Submit</button>
+                        <button class="button" type="button" onclick="showBeneficiaryModal()">Add Beneficiary</button>
                     </div>
-                </form>
-                <button onclick="hideTransactionModal()" style="margin-top: 20px;">Cancel</button>
-            </div>
+                </div>
+            </form>
+            <button class="cancel-button" onclick="hideTransactionModal()">Cancel</button>
         </div>
+    </div>
 
-        <!-- Transaction Modal -->
+    <!-- Beneficiary Modal -->
+    <div id="beneficiary-modal" class="modal">
+        <div class="modal-content">
+            <h2>New Beneficiary</h2>
+            <form id="beneficiary-form">
+                <label for="beneficiary-name">Beneficiary Name:</label>
+                <input type="text" id="beneficiary-name" placeholder="Enter beneficiary name" required>
+                
+                <label for="beneficiary-iban">Beneficiary IBAN:</label>
+                <input type="text" id="beneficiary-iban" placeholder="Enter beneficiary IBAN" required>
 
-        <!-- Add Beneficiary Button -->
-        
-
-        <!-- Beneficiary Modal -->
-        <div id="beneficiary-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5);">
-            <div style="position: absolute; top: 20%; left: 50%; transform: translate(-50%, -20%); background: white; padding: 20px; border-radius: 10px; width: 400px;">
-                <h2>New Beneficiary</h2>
-                <form id="beneficiary-form">
-                    <label for="beneficiary-name">Beneficiary Name:</label>
-                    <input type="text" id="beneficiary-name" required>
-                    <label for="beneficiary-iban">Beneficiary IBAN:</label>
-                    <input type="text" id="beneficiary-iban" required>
-                    <button type="submit">Submit</button>
-                </form>
-                <button onclick="hideBeneficiaryModal()" style="margin-top: 20px;">Cancel</button>
-            </div>
-        </div>
-
-        
-
-        <!-- Calendar Section -->
-        <div class="calendar-section">
-            <h2>Payment Calendar</h2>
-            <div class="calendar" id="payment-calendar">
-                <!-- Calendar will be dynamically generated -->
-            </div>
-        </div>
-
-        <!-- Upcoming Payments Section -->
-        <div class="upcoming-payments">
-            <h3>Upcoming Payments</h3>
-            <div id="upcoming-payments-list">
-                <!-- Upcoming payments will be dynamically generated -->
-            </div>
+                <button class="button" type="submit">Submit</button>
+            </form>
+            <button class="cancel-button" onclick="hideBeneficiaryModal()">Cancel</button>
         </div>
     </div>
 

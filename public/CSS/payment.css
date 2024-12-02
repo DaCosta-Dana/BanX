@@ -1,3 +1,161 @@
+/* Utility Classes */
+.box-shadow {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.background-light {
+    background: #f9f9f9;
+}
+
+.button {
+    background-color: #E9876A;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #d55a4b;
+}
+
+/* General Styling */
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+main {
+    margin-left: 220px;
+    padding: 20px;
+    flex-grow: 1;
+    background-color: #f5f5f5;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+/* Payments Section */
+.payments-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+}
+
+.payments-section h1,
+.payments-section h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.balance-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    border-radius: 10px;
+    background: var(--background-light);
+    box-shadow: var(--box-shadow);
+}
+
+.balance-section h2 {
+    font-size: 20px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+#account-balance {
+    font-size: 28px;
+    font-weight: bold;
+    color: #61BB84;
+}
+
+.transaction-button {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 30px;
+}
+
+.transaction-history table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+    margin-top: 15px;
+}
+
+.transaction-history table th,
+.transaction-history table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    color: #555;
+}
+
+/* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    box-shadow: var(--box-shadow);
+}
+
+.cancel-button {
+    background-color: #ccc;
+    color: #333;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cancel-button:hover {
+    background-color: #bbb;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+/* Calendar Section */
+
+.calendar-section {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-section h2 {
+    font-size: 20px;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+/* Calendar Styling */
 .calendar {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -22,11 +180,25 @@
 }
 
 .calendar .current-day {
-    background-color: #ffc107;
+    background-color: #c0bfbf;
     font-weight: bold;
 }
 
 .calendar .recurring-payment {
-    background-color: #28a745;
-    color: white;
+    background-color: #61BB84;
+}
+
+/* Upcoming Payments Section */
+.upcoming-payments {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.upcoming-payments h3 {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 15px;
 }
