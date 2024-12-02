@@ -1,0 +1,158 @@
+/* General container layout */
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+/* Main content layout */
+main {
+    margin-left: 220px; /* Match sidebar width */
+    padding: 20px;
+    background-color: #f5f5f5;
+    min-height: 100vh;
+    overflow-y: auto;
+}
+
+/* Account overview section */
+.account-overview h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Balance section */
+.balance-section {
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.balance-section h2 {
+    font-size: 20px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+#account-balance {
+    font-size: 24px;
+    font-weight: bold;
+    color: #61BB84; 
+}
+
+/* Account details */
+.account-details {
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.account-details h2 {
+    font-size: 20px;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.account-details p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.account-details button {
+    margin-top: 15px;
+    padding: 10px 15px;
+    background-color: #E9876A;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.account-details button:hover {
+    background-color: #d55a4b;
+}
+
+/* Recent transactions */
+.recent-transactions {
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.recent-transactions h2 {
+    font-size: 20px;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.recent-transactions table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+}
+
+.recent-transactions table th,
+.recent-transactions table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    color: #555;
+}
+
+.recent-transactions table th {
+    background-color: #f9f9f9;
+    font-weight: bold;
+}
+
+.recent-transactions table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.recent-transactions table tr:hover {
+    background-color: #f1f1f1;
+}
+
+#no-recent-transactions-message {
+    margin-top: 10px;
+    color: #777;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* Account settings */
+.account-settings {
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.account-settings h2 {
+    font-size: 20px;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.account-settings button {
+    margin: 5px;
+    padding: 10px 15px;
+    background-color: #E9876A;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.account-settings button:hover {
+    background-color: #d55a4b;
+}
