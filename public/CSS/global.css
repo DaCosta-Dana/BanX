@@ -1,4 +1,4 @@
-/* Global Styles, which apply to all elements on the page */
+/* ======Global Styles, which apply to all elements====== */
 * {
     /* Remove default margins and padding from all elements */
     margin: 0;
@@ -11,7 +11,7 @@
     font-family: Arial, sans-serif;
 }
 
-/* Sidebar full height and layout */
+/* ============Sidebar========== */
 .sidebar {
     width: 220px;
     background-color: #f9f9f9; /* Sidebar gray background */
@@ -86,4 +86,26 @@
     list-style: none; /* Remove dots from bottom items */
     padding: 0;
     margin: 0;
+}
+
+/* ============Header========== */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+}
+
+.profile-name {
+    margin-right: 10px;
+}
+
+.profile-pic {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
 }
