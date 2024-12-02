@@ -64,16 +64,18 @@
     border-radius: 5px; /* Rounded corners */
 }
 
-.sidebar nav ul li button:focus {
+.sidebar nav ul li button:focus,
+.sidebar-bottom ul li button:focus {
     background-color: #E9876A; /* Background color on focus */
     color: white; /* Text color on focus */
     border-radius: 5px; /* Rounded corners */
     outline: none; /* Remove default focus outline */
 }
 
-.sidebar nav ul li.active button {
+.sidebar nav ul li.active button,
+.sidebar-bottom ul li.active button {
     background-color: #E9876A; /* Background color for the active button */
-    color: white;
+    color: white; /* Text color on focus */
     font-weight: bold; /* Emphasize active button */
     border-radius: 5px;
 }
