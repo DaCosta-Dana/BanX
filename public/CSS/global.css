@@ -13,8 +13,9 @@
 
 .sidebar {
     width: 220px;
-    background-color: #f8f9fa;
+    background-color: #f9f9f9; /* Sidebar gray background */
     padding: 20px;
+    height: 100vh; /* Ensure it fills the entire viewport (page from top to bottom) */
 }
 
 .sidebar .logo h2 {
@@ -23,6 +24,7 @@
     margin-bottom: 20px;
 }
 
+/* Sidebar navigation list */
 .sidebar nav ul {
     list-style-type: none;
 }
@@ -40,7 +42,8 @@
 }
 
 /* Sidebar button styles */
-.sidebar nav ul li button {
+.sidebar nav ul li button,
+.sidebar-bottom ul li button {
     width: 100%; /* Make the buttons fill the sidebar width */
     padding: 15px;
     border: none;
@@ -51,9 +54,11 @@
     cursor: pointer;
     outline: none;
     transition: background-color 0.3s ease, color 0.3s ease;
+    margin-bottom: 10px;
 }
 
-.sidebar nav ul li button:hover {
+.sidebar nav ul li button:hover,
+.sidebar-bottom ul li button:hover {
     background-color: #E9876A; /* Background color on hover */
     color: white; /* Text color on hover */
     border-radius: 5px; /* Rounded corners */
@@ -71,16 +76,6 @@
     color: white;
     font-weight: bold; /* Emphasize active button */
     border-radius: 5px;
-}
-
-/* Style for the "Support" item */
-.sidebar nav ul li {
-    margin-bottom: 10px;
-}
-
-.sidebar nav ul li:last-child {
-    color: #555; /* Default color for non-button items */
-    padding: 15px;
 }
 
 .sidebar .badge {
