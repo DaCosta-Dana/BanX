@@ -73,9 +73,20 @@
 
                 <div class="recent-transactions">
                     <h2>Recent Transactions</h2>
-                    <ul id="transaction-list">
-                        <!-- Transactions will be inserted here by JavaScript -->
-                    </ul>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Account</th>
+                                <th>Description</th>
+                                <th>Amount</th>
+                                <th>Category</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transaction-data">
+                            <!-- Rows will be dynamically added -->
+                        </tbody>
+                    </table>
                 </div>
 
             </section>

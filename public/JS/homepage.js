@@ -14,6 +14,9 @@ function redirectToMyAccount() {
     window.location.href = "myAccount.html";
 }
 
+function redirectToSettings() {
+    window.location.href = "settings.html";
+}
 
 async function updateUsername() {
     const username = await fetchUsername();
@@ -88,22 +91,25 @@ function formatDate(dateString) {
 async function updateTransactions() {
     const username = await fetchUsername();
     const transactions = await fetchTransactions(username);
-    const transactionList = document.getElementById("transaction-list");
-    transactionList.innerHTML = ""; // Clear existing transactions
+    const transactionTableBody = document.getElementById("transaction-data");
+
+    // Clear existing rows
+    transactionTableBody.innerHTML = "";
 
     // Sort transactions by date in descending order
     transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
 
+    // Populate table rows
     transactions.forEach(transaction => {
-        const transactionItem = document.createElement("li");
-        transactionItem.innerHTML = `
-            <span>${transaction.transactionName}</span>
-            <span>${formatDate(transaction.date)}</span>
-            <span>${transaction.beneficiary_account}</span>
-            <span>€${transaction.amount.toFixed(2)}</span>
-            <span class="status">${transaction.category}</span>
+        const transactionRow = document.createElement("tr");
+        transactionRow.innerHTML = `
+            <td>${formatDate(transaction.date)}</td>
+            <td> ${transaction.beneficiary_account}</td>
+            <td>${transaction.transactionName}</td>
+            <td>€${transaction.amount.toFixed(2)}</td>
+            <td>${transaction.category}</td>
         `;
-        transactionList.appendChild(transactionItem);
+        transactionTableBody.appendChild(transactionRow);
     });
 }
 

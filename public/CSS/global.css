@@ -113,10 +113,54 @@ header {
 
 }
 
-/* ============Transaction========== */
+/* ============Account Balance========== */
 
 .account-balance {
     font-size: 36px;
     color: #61BB84;
     margin: 10px 0;
+}
+
+/* =============Recent transactions============ */
+
+.recent-transactions {
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.recent-transactions h2 {
+    font-size: 20px;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.recent-transactions table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+}
+
+.recent-transactions table th,
+.recent-transactions table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    color: #555;
+}
+
+.recent-transactions table th {
+    background-color: #f9f9f9;
+    font-weight: bold;
+}
+
+.recent-transactions table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.recent-transactions table tr:hover {
+    background-color: #f1f1f1;
 }
