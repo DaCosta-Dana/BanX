@@ -1,0 +1,31 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+}
+
+.chart-container {
+    margin: 20px 0;
+    max-width: 600px;
+    max-height: 400px;
+}
+
+.chart-container canvas {
+    display: block;
+    width: 100% !important;
+    height: auto !important;
+}

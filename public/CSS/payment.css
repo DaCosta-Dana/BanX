@@ -1,0 +1,36 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+.calendar div {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.calendar .header {
+    font-weight: bold;
+    background-color: #f4f4f4;
+}
+
+.calendar .day {
+    cursor: pointer;
+}
+
+.calendar .current-day {
+    background-color: #ffc107;
+    font-weight: bold;
+}
+
+.calendar .recurring-payment {
+    background-color: #28a745;
+    color: white;
+}
