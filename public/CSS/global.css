@@ -11,11 +11,15 @@
     font-family: Arial, sans-serif;
 }
 
+/* Sidebar full height and layout */
 .sidebar {
     width: 220px;
     background-color: #f9f9f9; /* Sidebar gray background */
     padding: 20px;
-    height: 100vh; /* Ensure it fills the entire viewport (page from top to bottom) */
+    height: 100vh; /* Full height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Pushes .sidebar-bottom to the bottom */
 }
 
 .sidebar .logo h2 {
@@ -24,27 +28,21 @@
     margin-bottom: 20px;
 }
 
-/* Sidebar navigation list */
+/* Sidebar navigation list styles */
 .sidebar nav ul {
-    list-style-type: none;
+    list-style-type: none; /* Remove bullet points */
+    padding: 0;
+    margin: 0;
 }
 
 .sidebar nav ul li {
-    padding: 10px;
-    font-size: 18px;
-    color: #333;
-    cursor: pointer;
+    padding: 10px 0;
 }
 
-.sidebar nav ul li.active {
-    color: #E9876A;
-    font-weight: bold;
-}
-
-/* Sidebar button styles */
+/* Button styles for both nav and bottom buttons */
 .sidebar nav ul li button,
 .sidebar-bottom ul li button {
-    width: 100%; /* Make the buttons fill the sidebar width */
+    width: 100%; /* Full button width */
     padding: 15px;
     border: none;
     background: none;
@@ -54,44 +52,38 @@
     cursor: pointer;
     outline: none;
     transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Remove margin between buttons in sidebar-bottom */
+.sidebar-bottom ul li {
     margin-bottom: 10px;
 }
 
+/* Hover effect for all buttons */
 .sidebar nav ul li button:hover,
 .sidebar-bottom ul li button:hover {
-    background-color: #E9876A; /* Background color on hover */
-    color: white; /* Text color on hover */
+    background-color: #E9876A; /* Hover background */
+    color: white; /* Hover text color */
     border-radius: 5px; /* Rounded corners */
 }
 
-.sidebar nav ul li button:focus,
-.sidebar-bottom ul li button:focus {
-    background-color: #E9876A; /* Background color on focus */
-    color: white; /* Text color on focus */
-    border-radius: 5px; /* Rounded corners */
-    outline: none; /* Remove default focus outline */
-}
-
+/* Active button (selected page) */
 .sidebar nav ul li.active button,
 .sidebar-bottom ul li.active button {
-    background-color: #E9876A; /* Background color for the active button */
-    color: white; /* Text color on focus */
-    font-weight: bold; /* Emphasize active button */
+    background-color: #E9876A; /* Active background */
+    color: white; /* Active text color */
+    font-weight: bold;
     border-radius: 5px;
 }
 
-.sidebar .badge {
-    background: #E9876A;
-    color: #fff;
-    padding: 2px 8px;
-    border-radius: 50%;
-    font-size: 12px;
-    margin-left: 5px;
+/* .sidebar-bottom styles */
+.sidebar-bottom {
+    font-size: 16px;
+    margin-top: auto; /* Push to bottom of sidebar */
 }
 
-.sidebar-bottom {
-    position: absolute;
-    bottom: 20px;
-    font-size: 18px;
-    color: #333;
+.sidebar-bottom ul {
+    list-style: none; /* Remove dots from bottom items */
+    padding: 0;
+    margin: 0;
 }
