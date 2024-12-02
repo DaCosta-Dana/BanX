@@ -4,13 +4,6 @@
     flex-direction: row;
 }
 
-/* Account overview section */
-.account-overview h1 {
-    font-size: 28px;
-    margin-bottom: 20px;
-    color: #333;
-}
-
 /* Balance section */
 .balance-section {
     padding: 20px;

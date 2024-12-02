@@ -1,3 +1,5 @@
+// ========== Redirection Function ==========
+
 function redirectToPayment() {
     window.location.href = "payment.html";
 }
@@ -17,6 +19,12 @@ function redirectToMyAccount() {
 function redirectToSettings() {
     window.location.href = "settings.html";
 }
+
+function redirectToSupport() {
+    window.location.href = "support.html";
+}
+
+// ========== Function ==========
 
 async function updateUsername() {
     const username = await fetchUsername();
