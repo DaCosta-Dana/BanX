@@ -1,16 +1,3 @@
-/* Global Styles, which apply to all elements on the page */
-* {
-    /* Remove default margins and padding from all elements */
-    margin: 0;
-    padding: 0;
-
-    /* Use the border-box model to include padding and borders in the width and height of elements */
-    box-sizing: border-box;
-
-    /* Set the font family for all elements */
-    font-family: Arial, sans-serif;
-}
-
 body {
     /* Set the height of the body to the full height of the viewport */
     height: 100vh;
