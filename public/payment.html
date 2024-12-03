@@ -53,7 +53,6 @@
                 <div class="balance-section background-light">
                     <h2>Account Balance</h2>
                     <p class="account-balance" id="total-balance">€0.00</p>
-
                 </div>
 
                 <!-- New Transaction Button -->
@@ -146,6 +145,26 @@
                 <button class="button" type="submit">Submit</button>
             </form>
             <button class="cancel-button" onclick="hideBeneficiaryModal()">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Add Recurring Payment Modal -->
+    <div id="add-payment-modal" class="modal">
+        <div class="modal-content">
+            <h2>Add Recurring Payment</h2>
+            <form id="add-recurring-payment-form">
+                <label for="payment-name">Payment Name:</label>
+                <input type="text" id="payment-name" placeholder="Enter payment name" required>
+                
+                <label for="payment-amount">Amount:</label>
+                <input type="number" id="payment-amount" step="0.01" placeholder="Enter amount" required>
+                
+                <label for="payment-day">Day of the Month:</label>
+                <input type="number" id="payment-day" min="1" max="31" required>
+
+                <button class="button" type="submit">Add Payment</button>
+            </form>
+            <button class="cancel-button" onclick="hideAddPaymentModal()">Cancel</button>
         </div>
     </div>
 
