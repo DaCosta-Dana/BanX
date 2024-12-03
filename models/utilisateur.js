@@ -7,6 +7,16 @@ function generateRandomIban() {
 const mongoose = require('mongoose');
 
 const utilisateurSchema = new mongoose.Schema({
+  firstname: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  lastname: {
+    type: String,
+    required: true,
+    unique: true
+  },
   username: {
     type: String,
     required: true,
@@ -28,7 +38,7 @@ const utilisateurSchema = new mongoose.Schema({
   },
   balance: { 
     type: Number, 
-    default: 100 
+    default: 10000
   },
   iban: {
     type: String,
