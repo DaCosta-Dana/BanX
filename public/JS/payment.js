@@ -177,10 +177,10 @@ document.addEventListener('DOMContentLoaded', populateCategoryDropdown);
 
 //CALENDAR 
 
-let transaction = [
-    { date: "2024-11-01", description: "Online Purchase", comment: "Amazon", amount: -120.00, status: "Completed" },
-    { date: "2024-11-05", description: "Salary Credit", comment: "EY Salary", amount: 5500.00, status: "Completed" }
-];
+// let transaction = [
+//     { date: "2024-11-01", description: "Online Purchase", comment: "Amazon", amount: -120.00, status: "Completed" },
+//     { date: "2024-11-05", description: "Salary Credit", comment: "EY Salary", amount: 5500.00, status: "Completed" }
+// ];
 
 const recurringPayments = [
     { day: 5, name: "Spotify", amount: 9.99 },
