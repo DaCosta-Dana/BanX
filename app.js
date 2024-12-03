@@ -43,7 +43,8 @@ app.get('/', (req, res) => {
 
 // Définit une route pour gérer les requêtes POST à /signup.
 app.post('/signup', async (req, res) => {
-  const { firstname, lastname, username, email, password, phone } = req.body;
+  const {firstname, lastname, username, email, password, phone } = req.body;
+
 
   if (!firstname ||!lastname ||!username || !email || !password || !phone) {
     return res.status(400).send({ message: 'Tous les champs sont requis.' });

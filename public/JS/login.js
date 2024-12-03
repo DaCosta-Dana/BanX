@@ -63,7 +63,9 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
   const phone = document.getElementById('signup-phone').value.trim();
 
   // Validation check to ensure all fields are filled
-  if (!firstname || !lastname || !username || !email || !password || !phone ) {
+
+  if (!firstname ||!lastname ||!username || !email || !password || !phone ) {
+
     alert('Veuillez remplir tous les champs.');
     return;
   }
