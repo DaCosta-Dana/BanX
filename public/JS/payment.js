@@ -177,13 +177,18 @@ document.addEventListener('DOMContentLoaded', populateCategoryDropdown);
 
 //CALENDAR 
 
-// Simulate recurring payments
+// let transaction = [
+//     { date: "2024-11-01", description: "Online Purchase", comment: "Amazon", amount: -120.00, status: "Completed" },
+//     { date: "2024-11-05", description: "Salary Credit", comment: "EY Salary", amount: 5500.00, status: "Completed" }
+// ];
+
 const recurringPayments = [
     { day: 5, name: "Spotify", amount: 9.99 },
     { day: 12, name: "Electricity Bill", amount: 50.0 },
     { day: 20, name: "Netflix", amount: 19.99 },
     { day: 25, name: "Gym Membership", amount: 35.0 }
 ];
+
 const today = new Date();
 
 // Render calendar
@@ -191,7 +196,6 @@ function renderCalendar() {
     const calendar = document.getElementById("payment-calendar");
     calendar.innerHTML = ""; // Clear previous content
 
-    // Calendar header
     const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     daysOfWeek.forEach(day => {
         const dayHeader = document.createElement("div");
@@ -200,42 +204,36 @@ function renderCalendar() {
         calendar.appendChild(dayHeader);
     });
 
-    // Get current month and year
     const year = today.getFullYear();
     const month = today.getMonth();
     const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-    // Fill in blank days before the first day of the month
     for (let i = 0; i < firstDay; i++) {
-        const blankDay = document.createElement("div");
-        calendar.appendChild(blankDay);
+        calendar.appendChild(document.createElement("div"));
     }
 
-    // Fill in days of the month
     for (let day = 1; day <= daysInMonth; day++) {
         const dayCell = document.createElement("div");
         dayCell.classList.add("day");
         dayCell.textContent = day;
 
-        // Highlight the current day
         if (day === today.getDate()) {
             dayCell.classList.add("current-day");
         }
 
-        // Highlight recurring payments
         if (recurringPayments.some(payment => payment.day === day)) {
             dayCell.classList.add("recurring-payment");
         }
 
+        dayCell.addEventListener("click", () => showAddPaymentModal(day));
         calendar.appendChild(dayCell);
     }
 }
 
-// Render upcoming payments
 function renderUpcomingPayments() {
     const upcomingPaymentsList = document.getElementById("upcoming-payments-list");
-    upcomingPaymentsList.innerHTML = ""; // Clear previous content
+    upcomingPaymentsList.innerHTML = "";
 
     recurringPayments.forEach(payment => {
         const paymentItem = document.createElement("div");
@@ -245,6 +243,30 @@ function renderUpcomingPayments() {
     });
 }
 
-// Initialize the page
+
+function showAddPaymentModal(day) {
+    document.getElementById("payment-day").value = day;
+    document.getElementById("add-payment-modal").style.display = "block";
+}
+
+function hideAddPaymentModal() {
+    document.getElementById("add-payment-modal").style.display = "none";
+    document.getElementById("add-recurring-payment-form").reset();
+}
+
+document.getElementById("add-recurring-payment-form").addEventListener("submit", event => {
+    event.preventDefault();
+
+    const name = document.getElementById("payment-name").value;
+    const amount = parseFloat(document.getElementById("payment-amount").value);
+    const day = parseInt(document.getElementById("payment-day").value);
+
+    recurringPayments.push({ day, name, amount });
+    alert("Payment added!");
+    renderCalendar();
+    renderUpcomingPayments();
+    hideAddPaymentModal();
+});
+
 renderCalendar();
 renderUpcomingPayments();
