@@ -1,19 +1,21 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
+
+    <!-- Responsive design for different screen sizes -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BanX My Account</title>
+
+    <title>BanX Login</title>
 
     <link rel="stylesheet" href="CSS/global.css">
-    <link rel="stylesheet" href="CSS/account.css">
-
+    <link rel="stylesheet" href="CSS/login.css">
 </head>
 
 <body>
     <div class="container">
-
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="logo">
@@ -21,11 +23,11 @@
             </div>
             <nav>
                 <ul>
-                    <li><button onclick="redirectToDashboard()">Dashboard</button></li>
+                    <li><button onclick="redirectToDasboard()">Dashboard</button></li>
                     <li><button onclick="redirectToMyAccount()">My Account</button></li>
                     <li><button onclick="redirectToPayment()">Payments</button></li>
                     <li><button onclick="redirectToAnalytics()">Analytics</button></li>
-                    <li class="active"><button onclick="redirectToSupport()">Support</button></li>
+                    <li><button class="active" onclick="redirectToSupport()">Support</button></li>
                 </ul>
             </nav>
             <div class="sidebar-bottom">
@@ -40,19 +42,80 @@
         <main>
             <header>
                 <h1>Frequently Asked Questions</h1>
-
                 <div class="profile">
                     <span class="profile-name">Shelly J.</span>
                     <img src="Assets/profile_pic.jpg" alt="profile picture" class="profile-pic">
                 </div>
             </header>
 
+            <!-- FAQ Section -->
+            <section class="faq-section">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleAnswer(this)">
+                        What is BanX?
+                    </button>
+                    <div class="faq-answer">
+                        <p>BanX is a simulation of a digital banking platform that enables users to manage their finances, make payments, and analyze their spending with ease.</p>
+                    </div>
+                </div>
 
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleAnswer(this)">
+                        How do I create a new transaction?
+                    </button>
+                    <div class="faq-answer">
+                        <p>To create a new transaction, navigate to the Payments section and click on "New Transaction." Fill in the required details and submit the form.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleAnswer(this)">
+                        How can I reset my password?
+                    </button>
+                    <div class="faq-answer">
+                        <p>To reset your password, go to the Settings section and select "Change Password." Follow the instructions to securely update your credentials.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleAnswer(this)">
+                        What is the support contact information?
+                    </button>
+                    <div class="faq-answer">
+                        <p>You can reach our support team at support@banx.com for assistance.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleAnswer(this)">
+                        How do recurring payments work?
+                    </button>
+                    <div class="faq-answer">
+                        <p>Recurring payments allow you to set up automated transactions on a specified day of the month. You can configure them in the Payments section.</p>
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
 
+    <script>
+        function toggleAnswer(button) {
+            const answer = button.nextElementSibling;
+            answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function redirectTo(page) {
+            alert('Redirecting to ' + page);
+            // Here you would typically use window.location.href to navigate to the desired page
+        }
+
+        function logOut() {
+            alert('Logging out...');
+            // Implement logout functionality here
+        }
+    </script>
+
     <script src="JS/homepage.js"></script>
-    
 </body>
 
-</html>
+</html> 

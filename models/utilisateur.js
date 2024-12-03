@@ -10,6 +10,8 @@ const utilisateurSchema = new mongoose.Schema({
   firstname: {
     type: String,
     required: true
+
+
   },
   lastname: {
     type: String,
@@ -37,7 +39,7 @@ const utilisateurSchema = new mongoose.Schema({
   },
   balance: { 
     type: Number, 
-    default: 100 
+    default: 10000
   },
   iban: {
     type: String,
