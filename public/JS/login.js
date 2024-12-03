@@ -56,12 +56,14 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
 
   // Retrieve the values of the username, email, and password input fields
   const username = document.getElementById('signup-username').value.trim();
+  const firstname = document.getElementById('signup-firstname').value.trim();
+  const lastname = document.getElementById('signup-lastname').value.trim();
   const email = document.getElementById('signup-email').value.trim();
   const password = document.getElementById('signup-password').value.trim();
   const phone = document.getElementById('signup-phone').value.trim();
 
   // Validation check to ensure all fields are filled
-  if (!username || !email || !password || !phone ) {
+  if (!firstname ||!lastname ||!username || !email || !password || !phone ) {
     alert('Veuillez remplir tous les champs.');
     return;
   }
@@ -72,7 +74,7 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ username, email, password, phone }),
+    body: JSON.stringify({ firstname, lastname, username, email, password, phone }),
   });
 
   if (response.ok) {

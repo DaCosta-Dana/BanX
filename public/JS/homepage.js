@@ -46,7 +46,31 @@ async function fetchUsername() {
     }
 }
 
+async function fetchFirstname(username) {
+    try {
+        const response = await fetch(`/utilisateurs/firstname/${username}`);
+        console.log('Response status:', response.status);
+        if (!response.ok) {
+            alert("Error fetching firstname");
+            throw new Error('Failed to fetch firstname');
+        }
+        const data = await response.json();
+        console.log('Response data:', data);
+        
+        return data.firstname;
+    } catch (error) {
+        console.error('Error fetching firstname:', error);
+        return 0;
+    }
+}
 
+// Function to update the balance
+async function updateFirstname() {
+    const username = await fetchUsername();
+    const firstname = await fetchFirstname(username);
+    const balanceElement = document.getElementById("username");
+    balanceElement.textContent = firstname;
+}
 
 // Function to fetch balance from the backend
 async function fetchBalance(username) {
@@ -124,7 +148,7 @@ async function updateTransactions() {
 // Initialise all dynamic data on page load
 function initialiseDashboard() {
     updateBalance();
-    updateUsername();
+    updateFirstname();
     updateTransactions();
 }
 
