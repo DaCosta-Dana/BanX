@@ -35,6 +35,7 @@ app.use('/utilisateurs', utilisateursRoutes);
 const transactionsRouter = require('./routes/transactions');
 app.use('/transactions', transactionsRouter);
 
+
 // Gère les requètes GET a la racine. Lorqu'un user se connecte, il est redirigé vers la page d'accueil.
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/public/login.html');
@@ -42,14 +43,14 @@ app.get('/', (req, res) => {
 
 // Définit une route pour gérer les requêtes POST à /signup.
 app.post('/signup', async (req, res) => {
-  const { username, email, password, phone } = req.body;
+  const { firstname, lastname, username, email, password, phone } = req.body;
 
-  if (!username || !email || !password || !phone) {
+  if (!firstname ||!lastname ||!username || !email || !password || !phone) {
     return res.status(400).send({ message: 'Tous les champs sont requis.' });
   }
 
   try {
-    const nouvelUtilisateur = new Utilisateur({ username, email, password, phone });
+    const nouvelUtilisateur = new Utilisateur({ firstname, lastname, username, email, password, phone });
     await nouvelUtilisateur.save();
     res.status(201).send({ message: 'Inscription réussie' });
   } catch (err) {
@@ -97,3 +98,4 @@ const port = 3000;
 app.listen(port, () => {
   console.log(`Serveur en cours d'exécution sur http://localhost:${port}`);
 });
+

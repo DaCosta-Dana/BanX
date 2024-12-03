@@ -27,26 +27,24 @@ function redirectToSupport() {
 // ========== Function ==========
 
 async function updateUsername() {
-    const username = await fetchUsername();
-    const usernameElement = document.getElementById("username")
-    usernameElement.textContent = username;
+    const user = await fetchUser();
+    const usernameElement = document.getElementById("firstname");
+    usernameElement.textContent = user.firstname;
 }
 
-async function fetchUsername() {
+async function fetchUser() {
     try {
-        const response = await fetch('/utilisateurs/username');
+        const response = await fetch('/utilisateurs/user');
         if (!response.ok) {
-            throw new Error('Failed to fetch username');
+            throw new Error('Failed to fetch user');
         }
         const data = await response.json();
-        return data.username;
+        return data;
     } catch (error) {
-        console.error('Error fetching username:', error);
+        console.error('Error fetching user:', error);
         return null;
     }
 }
-
-
 
 // Function to fetch balance from the backend
 async function fetchBalance(username) {
