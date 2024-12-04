@@ -145,6 +145,26 @@ async function updateTransactions() {
     });
 }
 
+async function logout() {
+    try {
+        const response = await fetch('/transactions/logout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (response.ok) {
+            window.location.href = '/login.html';
+        } else {
+            alert('Error logging out');
+        }
+    } catch (error) {
+        console.error('Error logging out:', error);
+        alert('Error logging out');
+    }
+}
+
 // Initialise all dynamic data on page load
 function initialiseDashboard() {
     updateBalance();

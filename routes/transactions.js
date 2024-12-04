@@ -87,4 +87,35 @@ router.get('/spendingByCategory/:username', async (req, res) => {
   }
 });
 
+// Route to fetch spending by month for a user
+router.get('/spendingByMonth/:username', async (req, res) => {
+  try {
+    const transactions = await Transaction.find({ sender_account: req.params.username });
+    const sixMonthsAgo = new Date();
+    sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+
+    const spendingByMonth = transactions.reduce((acc, transaction) => {
+      const transactionDate = new Date(transaction.date);
+      if (transactionDate >= sixMonthsAgo) {
+        const month = transactionDate.toLocaleString('default', { month: 'long', year: 'numeric' });
+        acc[month] = (acc[month] || 0) + transaction.amount;
+      }
+      return acc;
+    }, {});
+    res.status(200).json(spendingByMonth);
+  } catch (err) {
+    res.status(500).json({ message: 'Error fetching spending by month' });
+  }
+});
+
+// Route to handle user logout
+router.post('/logout', (req, res) => {
+  req.session.destroy(err => {
+    if (err) {
+      return res.status(500).json({ message: 'Error logging out' });
+    }
+    res.status(200).json({ message: 'Logged out successfully' });
+  });
+});
+
 module.exports = router;

@@ -22,19 +22,6 @@ const spendingCategoryData = {
     }]
 };
 
-// Data for Spending Trend
-const spendingTrendData = {
-    labels: ["June", "July", "August", "September", "October", "November"],
-    datasets: [{
-        label: "Spending Trend",
-        data: [2000, 1800, 2500, 2200, 2400, 2800],
-        backgroundColor: "rgba(75, 192, 192, 0.2)",
-        borderColor: "rgba(75, 192, 192, 1)",
-        borderWidth: 2,
-        fill: true
-    }]
-};
-
 // Chart.js Configuration
 const options = {
     responsive: false, // Disable responsiveness
@@ -98,6 +85,49 @@ async function updateSpendingCategoryChart() {
   });
 }
 
+async function fetchSpendingByMonth(username) {
+  try {
+    const response = await fetch(`/transactions/spendingByMonth/${username}`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch spending by month');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching spending by month:', error);
+    return {};
+  }
+}
+
+async function renderSpendingByMonthChart() {
+  const username = await fetchUsername();
+  const spendingByMonth = await fetchSpendingByMonth(username);
+
+  const labels = Object.keys(spendingByMonth);
+  const data = Object.values(spendingByMonth);
+
+  const ctx = document.getElementById('spendingTrendChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        label: 'Spending by Month',
+        data,
+        borderColor: 'rgba(75, 192, 192, 1)',
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        fill: true,
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+}
+
 // Render Charts
 window.onload = () => {
     const ctx2 = document.getElementById("spendingTrendChart").getContext("2d");
@@ -111,4 +141,5 @@ window.onload = () => {
 
 document.addEventListener('DOMContentLoaded', async () => {
   await updateSpendingCategoryChart();
+  await renderSpendingByMonthChart();
 });
