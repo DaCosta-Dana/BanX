@@ -64,7 +64,6 @@ async function fetchFirstname(username) {
     }
 }
 
-// Function to update the balance
 async function updateFirstname() {
     const username = await fetchUsername();
     const firstname = await fetchFirstname(username);
@@ -120,7 +119,7 @@ function formatDate(dateString) {
     return `${day}/${month}/${year}`;
 }
 
-async function updateTransactions() {
+async function updateTransactionsDashboard() {
     const username = await fetchUsername();
     const transactions = await fetchTransactions(username);
     const transactionTableBody = document.getElementById("transaction-data");
@@ -131,19 +130,57 @@ async function updateTransactions() {
     // Sort transactions by date in descending order
     transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
 
+    // Get the last 3 transactions
+    const recentTransactions = transactions.slice(0, 3);
+
     // Populate table rows
-    transactions.forEach(transaction => {
+    recentTransactions.forEach(transaction => {
         const transactionRow = document.createElement("tr");
+        const isSender = transaction.sender_account === username;
+        const amount = isSender ? `- €${transaction.amount.toFixed(2)}` : `+ €${transaction.amount.toFixed(2)}`;
+        const amountClass = isSender ? 'amount-red' : 'amount-green';
         transactionRow.innerHTML = `
             <td>${formatDate(transaction.date)}</td>
-            <td> ${transaction.beneficiary_account}</td>
+            <td>${isSender ? transaction.beneficiary_account : transaction.sender_account}</td>
             <td>${transaction.transactionName}</td>
-            <td>€${transaction.amount.toFixed(2)}</td>
+            <td class="${amountClass}">${amount}</td>
             <td>${transaction.category}</td>
         `;
         transactionTableBody.appendChild(transactionRow);
     });
 }
+
+async function updateTransactionsMyAccount() {
+    const username = await fetchUsername();
+    const transactions = await fetchTransactions(username);
+    const transactionTableBody = document.getElementById("transaction-data-my-account");
+
+    // Clear existing rows
+    transactionTableBody.innerHTML = "";
+
+    // Sort transactions by date in descending order
+    transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    // Populate table rows
+    transactions.forEach(transaction => {
+        const transactionRow = document.createElement("tr");
+        const isSender = transaction.sender_account === username;
+        const amount = isSender ? `- €${transaction.amount.toFixed(2)}` : `+ €${transaction.amount.toFixed(2)}`;
+        const amountClass = isSender ? 'amount-red' : 'amount-green';
+        transactionRow.innerHTML = `
+            <td>${formatDate(transaction.date)}</td>
+            <td>${isSender ? transaction.beneficiary_account : transaction.sender_account}</td>
+            <td>${transaction.transactionName}</td>
+            <td class="${amountClass}">${amount}</td>
+            <td>${transaction.category}</td>
+        `;
+        transactionTableBody.appendChild(transactionRow);
+    });
+}
+
+document.addEventListener("DOMContentLoaded", updateTransactionsMyAccount);
+
+document.addEventListener("DOMContentLoaded", initialiseDashboard);
 
 async function logout() {
     try {
@@ -169,7 +206,7 @@ async function logout() {
 function initialiseDashboard() {
     updateBalance();
     updateFirstname();
-    updateTransactions();
+    updateTransactionsDashboard();
 }
 
 // Call initialiseDashboard to load data on page load

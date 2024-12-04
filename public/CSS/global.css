@@ -177,3 +177,11 @@ main {
 .recent-transactions table tr:hover {
     background-color: #f1f1f1;
 }
+
+.amount-green {
+    color: green;
+}
+
+.amount-red {
+    color: red;
+}

@@ -1,13 +1,21 @@
-let transactions = [
-    { date: "2024-11-01", description: "Online Purchase",comment:"Amazon", amount: -120.00, status: "Completed" },
-    { date: "2024-11-05", description: "Salary Credit",comment:"EY Salary", amount: 5500.00, status: "Completed" }
-];
-
 const transactionData = document.getElementById("transaction-data");
 const noTransactionsMessage = document.getElementById("no-transactions-message");
 
+async function fetchTransactions(username) {
+    try {
+        const response = await fetch(`/transactions/userTransactions/${username}`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch transactions');
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching transactions:', error);
+        return [];
+    }
+}
+
 // Render transactions
-function renderTransactions() {
+function renderTransactions(transactions, username) {
     transactionData.innerHTML = "";
     if (transactions.length === 0) {
         noTransactionsMessage.style.display = "block";
@@ -15,10 +23,11 @@ function renderTransactions() {
         noTransactionsMessage.style.display = "none";
         transactions.forEach(transaction => {
             const row = document.createElement("tr");
+            const isSender = transaction.sender_account === username;
             row.innerHTML = `
                 <td>${transaction.date}</td>
-                <td>${transaction.description}</td>
-                <td>${transaction.amount < 0 ? "-" : ""}$${Math.abs(transaction.amount).toFixed(2)}</td>
+                <td>${isSender ? transaction.description : `Received from ${transaction.sender_account}`}</td>
+                <td>${isSender ? (transaction.amount < 0 ? "-" : "") : "+"}$${Math.abs(transaction.amount).toFixed(2)}</td>
                 <td>${transaction.status}</td>
             `;
             transactionData.appendChild(row);
@@ -26,8 +35,13 @@ function renderTransactions() {
     }
 }
 
+async function updateTransactions() {
+    const username = await fetchUsername();
+    const transactions = await fetchTransactions(username);
+    renderTransactions(transactions, username);
+}
 
-renderTransactions();
+document.addEventListener('DOMContentLoaded', updateTransactions);
 
 // Modal control
 function showTransactionModal() {
@@ -175,13 +189,6 @@ async function populateCategoryDropdown() {
 // Call the function to populate the category dropdown on page load
 document.addEventListener('DOMContentLoaded', populateCategoryDropdown);
 
-//CALENDAR 
-
-// let transaction = [
-//     { date: "2024-11-01", description: "Online Purchase", comment: "Amazon", amount: -120.00, status: "Completed" },
-//     { date: "2024-11-05", description: "Salary Credit", comment: "EY Salary", amount: 5500.00, status: "Completed" }
-// ];
-
 const recurringPayments = [
     { day: 5, name: "Spotify", amount: 9.99 },
     { day: 12, name: "Electricity Bill", amount: 50.0 },
@@ -242,7 +249,6 @@ function renderUpcomingPayments() {
         upcomingPaymentsList.appendChild(paymentItem);
     });
 }
-
 
 function showAddPaymentModal(day) {
     document.getElementById("payment-day").value = day;

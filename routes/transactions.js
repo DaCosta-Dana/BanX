@@ -66,7 +66,12 @@ router.post('/addTransaction', async (req, res) => {
 // Route to fetch transactions for a user
 router.get('/userTransactions/:username', async (req, res) => {
   try {
-    const transactions = await Transaction.find({ sender_account: req.params.username });
+    const transactions = await Transaction.find({
+      $or: [
+        { sender_account: req.params.username },
+        { beneficiary_account: req.params.username }
+      ]
+    });
     res.status(200).json(transactions);
   } catch (err) {
     res.status(500).json({ message: 'Error fetching transactions' });
