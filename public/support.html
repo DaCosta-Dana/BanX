@@ -4,17 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BanX My Account</title>
-
+    <title>BanX Support</title>
     <link rel="stylesheet" href="CSS/global.css">
     <link rel="stylesheet" href="CSS/account.css">
-
 </head>
 
 <body>
     <div class="container">
-
-        <!-- Sidebar -->
         <aside class="sidebar">
             <div class="logo">
                 <h2>BanX</h2>
@@ -36,23 +32,47 @@
             </div>
         </aside>
 
-        <!-- Main Content -->
         <main>
             <header>
                 <h1>Frequently Asked Questions</h1>
-
                 <div class="profile">
                     <span class="profile-name">Shelly J.</span>
                     <img src="Assets/profile_pic.jpg" alt="profile picture" class="profile-pic">
                 </div>
             </header>
 
-
+            <section class="faq">
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <h2 class="faq-title" onclick="toggleFAQ(this)">How do I add a new beneficiary?</h2>
+                        <div class="faq-answer">
+                            To add a beneficiary, navigate to the 'Payments' section, click on 'New Transaction', and then click on 'Add beneficiary' fill in the required details, and submit.
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <h2 class="faq-title" onclick="toggleFAQ(this)">How do I view my spending analytics?</h2>
+                        <div class="faq-answer">
+                            Visit the 'Analytics' section to see categorized spending details and overall spending graphs.
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <h2 class="faq-title" onclick="toggleFAQ(this)">How do I schedule recurring payments?</h2>
+                        <div class="faq-answer">
+                            In the 'Payments' section, select the date of the recurring payment in the calendar and fill in the required details and then submit. 
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <h2 class="faq-title" onclick="toggleFAQ(this)">Can I update my profile information?</h2>
+                        <div class="faq-answer">
+                            Yes, go to 'Settings' and edit the details in the profile section.
+                        </div>
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
 
     <script src="JS/homepage.js"></script>
-    
 </body>
 
 </html>

@@ -211,3 +211,25 @@ function initialiseDashboard() {
 
 // Call initialiseDashboard to load data on page load
 document.addEventListener("DOMContentLoaded", initialiseDashboard);
+
+// for the support page dw
+function toggleFAQ(title) {
+    const faqItem = title.parentElement; // Get the parent FAQ item
+
+    // Check if this item is already active
+    const isActive = faqItem.classList.contains("active");
+
+    // Close all FAQ items
+    const allItems = document.querySelectorAll(".faq-item");
+    allItems.forEach(item => item.classList.remove("active"));
+
+    // If the current item was not active, activate it
+    if (!isActive) {
+        faqItem.classList.add("active");
+    }
+}
+
+
+
+
+

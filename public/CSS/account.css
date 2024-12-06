@@ -84,3 +84,58 @@
 .account-settings button:hover {
     background-color: #d55a4b;
 }
+
+/* FAQ Section */
+.faq-container {
+    margin: 20px 0;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+/* FAQ item styling */
+.faq-item {
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden; /* Prevent content from spilling out */
+    transition: all 0.3s ease;
+}
+
+/* FAQ title styling */
+.faq-title {
+    font-size: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: underline; /* Underline the title */
+    color: #E9876A; /* Title color */
+    margin: 10px 0;
+    padding: 15px; /* Add padding for better click area */
+    background-color: #fff; /* White background for contrast */
+    transition: background-color 0.3s ease; /* Smooth background transition */
+}
+
+.faq-title:hover {
+    background-color: #f0f0f0; /* Light gray on hover */
+}
+
+/* FAQ answer */
+.faq-answer {
+    display: none; /* Initially hidden */
+    padding: 10px 15px; /* Padding for the answer */
+    font-size: 20px;
+    color: #555;
+    background-color: #f9f9f9; /* Match the container background */
+}
+
+/* Show answer when active */
+.faq-item.active .faq-answer {
+    display: block; /* Show answer when active */
+}
+
+/* Active item styling */
+.faq-item.active {
+    border-color: #E9876A; /* Highlight border for active item */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Slight shadow for active item */
+}
