@@ -153,4 +153,19 @@ router.post('/resetPassword', async (req, res) => {
     }
 });
 
+router.delete('/deleteAccount', async (req, res) => {
+    const username = req.session.username;
+
+    try {
+        const user = await Utilisateur.findOneAndDelete({ username });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        res.status(200).json({ message: 'Account deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting account:', error);
+        res.status(500).json({ message: 'An error occurred while deleting the account' });
+    }
+});
+
 module.exports = router;

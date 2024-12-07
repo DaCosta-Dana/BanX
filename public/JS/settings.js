@@ -45,3 +45,27 @@ async function resetPassword() {
         }
     }
 }
+
+async function deleteAccount() {
+    const confirmation = confirm("Are you sure you want to delete your account? This action cannot be undone.");
+    if (confirmation) {
+        try {
+            const response = await fetch('/utilisateurs/deleteAccount', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (response.ok) {
+                alert('Account deleted successfully');
+                window.location.href = '/login.html';
+            } else {
+                alert('Error deleting account');
+            }
+        } catch (error) {
+            console.error('Error deleting account:', error);
+            alert('Error deleting account');
+        }
+    }
+}
