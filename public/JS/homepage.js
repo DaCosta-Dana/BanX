@@ -229,6 +229,31 @@ function toggleFAQ(title) {
     }
 }
 
+async function fetchProfileName(username) {
+    try {
+        const response = await fetch(`/utilisateurs/profileName/${username}`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch profile name');
+        }
+        const data = await response.json();
+        return data.profileName;
+    } catch (error) {
+        console.error('Error fetching profile name:', error);
+        return null;
+    }
+}
+
+async function updateProfileName() {
+    const username = await fetchUsername();
+    const profileName = await fetchProfileName(username);
+    const profileNameElement = document.querySelector(".profile-name");
+    profileNameElement.textContent = profileName;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    updateProfileName();
+});
+
 
 
 

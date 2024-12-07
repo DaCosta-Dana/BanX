@@ -120,4 +120,37 @@ router.get('/categories', (req, res) => {
   res.status(200).json({ categories });
 });
 
+router.get('/profileName/:username', async (req, res) => {
+    try {
+        const user = await Utilisateur.findOne({ username: req.params.username });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        const profileName = `${user.firstname} ${user.lastname.charAt(0)}.`;
+        res.status(200).json({ profileName });
+    } catch (error) {
+        console.error('Error fetching profile name:', error);
+        res.status(500).json({ message: 'An error occurred while fetching the profile name' });
+    }
+});
+
+router.post('/resetPassword', async (req, res) => {
+    const { newPassword } = req.body;
+    const username = req.session.username;
+
+    try {
+        const user = await Utilisateur.findOne({ username });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        user.password = newPassword;
+        await user.save();
+        res.status(200).json({ message: 'Password reset successfully' });
+    } catch (error) {
+        console.error('Error resetting password:', error);
+        res.status(500).json({ message: 'An error occurred while resetting the password' });
+    }
+});
+
 module.exports = router;
