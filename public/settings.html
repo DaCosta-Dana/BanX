@@ -51,11 +51,10 @@
                 <!-- Account Details -->
                 <div class="account-details">
                     <h2>Account Details</h2>
-                    <p><strong>Account Holder:</strong> John Doe</p>
-                    <p><strong>Account Number:</strong> 123456789</p>
-                    <p><strong>Email:</strong> john.doe@example.com</p>
-                    <p><strong>Phone:</strong> +1-234-567-890</p>
-                    <p><strong>Address:</strong> 123 Elm Street, Springfield</p>
+                    <p><strong>Account Holder:</strong> <span id="account-holder">Loading...</span></p>
+                    <p><strong>Account Number:</strong> <span id="account-number">Loading...</span></p>
+                    <p><strong>Email:</strong> <span id="email">Loading...</span></p>
+                    <p><strong>Phone:</strong> <span id="phone">Loading...</span></p>
                     <button onclick="editPersonalInfo()">Edit Personal Info</button>
                 </div>
 
@@ -72,7 +71,26 @@
     <script src="JS/myAccount.js"></script>
     <script src="JS/homepage.js"></script>
     <script src="JS/settings.js"></script>
-    
+    <script>
+        async function fetchAccountDetails() {
+            try {
+                const response = await fetch('/utilisateurs/accountDetails');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch account details');
+                }
+                const data = await response.json();
+                document.getElementById('account-holder').textContent = data.accountHolder;
+                document.getElementById('account-number').textContent = data.accountNumber;
+                document.getElementById('email').textContent = data.email;
+                document.getElementById('phone').textContent = data.phone;
+                document.getElementById('address').textContent = data.address;
+            } catch (error) {
+                console.error('Error fetching account details:', error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', fetchAccountDetails);
+    </script>
 </body>
 
 </html>

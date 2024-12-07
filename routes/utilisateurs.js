@@ -168,4 +168,25 @@ router.delete('/deleteAccount', async (req, res) => {
     }
 });
 
+// Route pour récupérer les détails du compte
+router.get('/accountDetails', async (req, res) => {
+    const username = req.session.username; // Assuming the username is stored in the session
+    try {
+        const user = await Utilisateur.findOne({ username });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        res.status(200).json({
+            accountHolder: `${user.firstname} ${user.lastname}`,
+            accountNumber: user.iban,
+            email: user.email,
+            phone: user.phone,
+            
+        });
+    } catch (error) {
+        console.error('Error fetching account details:', error);
+        res.status(500).json({ message: 'An error occurred while fetching the account details' });
+    }
+});
+
 module.exports = router;
