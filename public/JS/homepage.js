@@ -258,3 +258,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+document.addEventListener('DOMContentLoaded', async () => {
+    await renderSpendingByMonthChart(); // Update this function if needed
+    await updateSpendingCategoryChart(); // Ensure this is included for the dashboard
+});
