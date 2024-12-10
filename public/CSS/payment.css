@@ -39,11 +39,6 @@
     box-shadow: var(--box-shadow);
 }
 
-.balance-section h2 {
-    font-size: 20px;
-    color: #555;
-    margin-bottom: 10px;
-}
 
 .transaction-button {
     display: flex;
@@ -176,25 +171,23 @@
 /* Calendar and Upcoming Payments Layout */
 .calendar-and-upcoming {
     display: flex;
-    gap: 20px; /* Space between calendar and payments */
-    margin-top: 30px;
-}
-
-.calendar-section {
-    flex: 1; /* Take up equal space */
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    background: white;
     padding: 20px;
-    background: #f9f9f9;
     border-radius: 10px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-.calendar-section h2 {
-    font-size: 20px;
-    color: #555;
-    margin-bottom: 15px;
+    margin-top: 20px;
 }
 
 /* Calendar Styling */
+.calendar-section {
+    flex: 1; /* Calendar takes up less space */
+    padding-right: 10px;
+}
+
 .calendar {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -239,16 +232,12 @@
 
 /* Upcoming Payments Section */
 .upcoming-payments {
-    flex: 1; /* Take up equal space */
-    padding: 20px;
-    background: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    font-family: 'Arial', sans-serif;
+    flex: 2; /* More space compared to the calendar */
+    margin-left: 10px;
 }
 
 .upcoming-payments h3 {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     margin-bottom: 15px;
     color: #555;
@@ -260,23 +249,17 @@
     margin: 0;
 }
 
-.upcoming-payments li {
-    margin-bottom: 10px;
-    padding: 10px;
-    background: white;
-    border-radius: 5px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    font-size: 14px;
-    color: #333;
+.upcoming-payments ul li {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #f1f1f1;
+    font-size: 14px;
 }
 
-.upcoming-payments li:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.upcoming-payments ul li:last-child {
+    border-bottom: none;
 }
 
 .upcoming-payments li span {
