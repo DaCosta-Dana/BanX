@@ -85,70 +85,76 @@
         <div class="modal-content">
             <h2>New Transaction</h2>
             <form id="transaction-step-form">
-                <div id="transaction">
-                    <label for="comment">Transaction Name:</label>
-                    <textarea id="comment" rows="1" placeholder="Enter transaction name"></textarea>
-
-                    <label for="beneficiary">Beneficiary:</label>
-                    <select id="beneficiary" required>
-                        <option value="">-- Select Beneficiary --</option>
-                    </select>
-
-                    <label for="amount">Amount:</label>
-                    <input type="number" id="amount" step="1" placeholder="Enter amount" required>
-
-                    <label for="category">Category:</label>
-                    <select id="category" name="category" required>
-                        <option value="">-- Select Category --</option>
-                    </select>
-
-                    <div class="form-buttons">
-                        <button class="button" type="submit">Submit</button>
-                        <button class="button" type="button" onclick="showBeneficiaryModal()">Add Beneficiary</button>
+                <label for="comment">Transaction Name:</label>
+                <textarea id="comment" rows="1" placeholder="Enter transaction name"></textarea>
+    
+                <div class="inline-inputs">
+                    <div>
+                        <label for="beneficiary">Beneficiary:</label>
+                        <select id="beneficiary" required>
+                            <option value="">-- Select Beneficiary --</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="amount">Amount:</label>
+                        <input type="number" id="amount" step="1" placeholder="Enter amount" required>
                     </div>
                 </div>
+    
+                <label for="category">Category:</label>
+                <select id="category" name="category" required>
+                    <option value="">-- Select Category --</option>
+                </select>
+    
+                <div class="form-buttons">
+                    <button class="button" type="submit">Submit</button>
+                    <button class="button" type="button" onclick="showBeneficiaryModal()">Add Beneficiary</button>
+                    <button class="cancel-button" type="button" onclick="hideTransactionModal()">Cancel</button>
+                </div>
             </form>
-            <button class="cancel-button" onclick="hideTransactionModal()">Cancel</button>
         </div>
     </div>
 
     <!-- Beneficiary Modal -->
-    <div id="beneficiary-modal" class="modal">
-        <div class="modal-content">
-            <h2>New Beneficiary</h2>
-            <form id="beneficiary-form">
-                <label for="beneficiary-name">Beneficiary Name:</label>
-                <input type="text" id="beneficiary-name" placeholder="Enter beneficiary name" required>
-                
-                <label for="beneficiary-iban">Beneficiary IBAN:</label>
-                <input type="text" id="beneficiary-iban" placeholder="Enter beneficiary IBAN" required>
+<div id="beneficiary-modal" class="modal">
+    <div class="modal-content">
+        <h2>New Beneficiary</h2>
+        <form id="beneficiary-form">
+            <label for="beneficiary-name">Beneficiary Name:</label>
+            <input type="text" id="beneficiary-name" placeholder="Enter beneficiary name" required>
 
+            <label for="beneficiary-iban">Beneficiary IBAN:</label>
+            <input type="text" id="beneficiary-iban" placeholder="Enter beneficiary IBAN" required>
+
+            <div class="form-buttons">
                 <button class="button" type="submit">Submit</button>
-            </form>
-            <button class="cancel-button" onclick="hideBeneficiaryModal()">Cancel</button>
-        </div>
+                <button class="cancel-button" type="button" onclick="hideBeneficiaryModal()">Cancel</button>
+            </div>
+        </form>
     </div>
+</div>
 
-    <!-- Add Recurring Payment Modal -->
-    <div id="add-payment-modal" class="modal">
-        <div class="modal-content">
-            <h2>Add Recurring Payment</h2>
-            <form id="add-recurring-payment-form">
-                <label for="payment-name">Payment Name:</label>
-                <input type="text" id="payment-name" placeholder="Enter payment name" required>
-                
-                <label for="payment-amount">Amount:</label>
-                <input type="number" id="payment-amount" step="0.01" placeholder="Enter amount" required>
-                
-                <label for="payment-day">Day of the Month:</label>
-                <input type="number" id="payment-day" min="1" max="31" required>
+<!-- Add Recurring Payment Modal -->
+<div id="add-payment-modal" class="modal">
+    <div class="modal-content">
+        <h2>Add Recurring Payment</h2>
+        <form id="add-recurring-payment-form">
+            <label for="payment-name">Payment Name:</label>
+            <input type="text" id="payment-name" placeholder="Enter payment name" required>
 
+            <label for="payment-amount">Amount:</label>
+            <input type="number" id="payment-amount" step="0.01" placeholder="Enter amount" required>
+
+            <label for="payment-day">Day of the Month:</label>
+            <input type="number" id="payment-day" min="1" max="31" placeholder="Enter day (1–31)" required>
+
+            <div class="form-buttons">
                 <button class="button" type="submit">Add Payment</button>
-            </form>
-            <button class="cancel-button" onclick="hideAddPaymentModal()">Cancel</button>
-        </div>
+                <button class="cancel-button" type="button" onclick="hideAddPaymentModal()">Cancel</button>
+            </div>
+        </form>
     </div>
-
+</div>
     <script src="JS/payment.js"></script>
     <script src="JS/homepage.js"></script>
 </body>
