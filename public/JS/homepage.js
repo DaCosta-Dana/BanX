@@ -130,8 +130,8 @@ async function updateTransactionsDashboard() {
     // Sort transactions by date in descending order
     transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-    // Get the last 3 transactions
-    const recentTransactions = transactions.slice(0, 3);
+    // Get the last 5 transactions
+    const recentTransactions = transactions.slice(0, 5);
 
     // Populate table rows
     recentTransactions.forEach(transaction => {
