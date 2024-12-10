@@ -11,6 +11,12 @@
     font-family: Arial, sans-serif;
 }
 
+/* General container layout */
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
 /* ============Sidebar========== */
 .sidebar {
     width: 220px;

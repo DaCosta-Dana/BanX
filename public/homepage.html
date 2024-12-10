@@ -7,6 +7,7 @@
     <title>BanX Homepage</title>
     
     <link rel="stylesheet" href="CSS/global.css">
+    <link rel="stylesheet" href="CSS/analytics.css">
     <link rel="stylesheet" href="CSS/homepage.css">
 </head>
 
@@ -52,10 +53,15 @@
                     <p class="account-balance" id="total-balance">€0.00</p>
                 </div>
 
-                <div class="money-flow">
+                <!-- <div class="money-flow">
                     <h2>Money Flow</h2>
                     <p>Savings <span class="growth" id="savings-growth">+0%</span></p>
                     <canvas id="moneyFlowChart"></canvas>
+                </div> -->
+                <!-- Spending Trend -->
+                <div class="chart-container">
+                    <h2>Spending by Month</h2>
+                    <canvas id="spendingTrendChart"></canvas>
                 </div>
             </section>
 
@@ -87,6 +93,8 @@
         </main>
     </div>
 
+    <script src="JS/analytics.js"></script>
     <script src="JS/homepage.js"></script>
+
 </body>
 </html>
