@@ -178,9 +178,7 @@ async function updateTransactionsMyAccount() {
     });
 }
 
-document.addEventListener("DOMContentLoaded", updateTransactionsMyAccount);
 
-document.addEventListener("DOMContentLoaded", initialiseDashboard);
 
 async function logout() {
     try {
@@ -250,21 +248,24 @@ async function updateProfileName() {
     profileNameElement.textContent = profileName;
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", updateTransactionsMyAccount);
+
+document.addEventListener("DOMContentLoaded", async () => {
+    // Initialise dashboard elements
+    initialiseDashboard();
     updateProfileName();
+
+    // Render analytics charts (if chart containers exist)
+    if (document.getElementById("spendingTrendChart")) {
+        await renderSpendingByMonthChart();
+    }
+    if (document.getElementById("spendingCategoryChart")) {
+        await updateSpendingCategoryChart();
+    }
+
+    // Render calendar and upcoming payments (only on relevant pages)
+    if (document.getElementById("payment-calendar")) {
+        renderCalendar();
+        renderUpcomingPayments();
+    }
 });
-
-
-
-
-
-document.addEventListener('DOMContentLoaded', async () => {
-    await renderSpendingByMonthChart(); // Update this function if needed
-    await updateSpendingCategoryChart(); // Ensure this is included for the dashboard
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-    renderCalendar();
-    renderUpcomingPayments();
-});
-
