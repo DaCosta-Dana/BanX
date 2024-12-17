@@ -274,5 +274,3 @@ document.getElementById("add-recurring-payment-form").addEventListener("submit",
     hideAddPaymentModal();
 });
 
-renderCalendar();
-renderUpcomingPayments();

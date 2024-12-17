@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="CSS/global.css">
     <link rel="stylesheet" href="CSS/analytics.css">
     <link rel="stylesheet" href="CSS/homepage.css">
+    <link rel="stylesheet" href="CSS/payment.css">
+    
+    
 </head>
 
 <body>
@@ -69,11 +72,19 @@
             </section>
 
             <section class="transactions">
-                <div class="upcoming-payments">
-                    <h2>Upcoming Payments</h2>
-                    <!-- Placeholder for adding upcoming payments content here -->
+                
+                <!-- Upcoming Payments and Calendar -->
+                <div class="calendar-and-upcoming box-shadow">
+                    <!-- Calendar Section -->
+                    <section class="calendar-section">
+                        <h2>Payment Calendar</h2>
+                        <div class="calendar" id="payment-calendar">
+                            <!-- Calendar will be dynamically generated -->
+                        </div>
+                    </section>
                 </div>
-
+            
+                <!-- Recent Transactions Section -->
                 <div class="recent-transactions">
                     <h2>Last 5 Transactions</h2>
                     <table>
@@ -91,12 +102,11 @@
                         </tbody>
                     </table>
                 </div>
-
-            </section>
         </main>
     </div>
 
     <script src="JS/analytics.js"></script>
+    <script src="JS/payment.js"></script>
     <script src="JS/homepage.js"></script>
 
 </body>
