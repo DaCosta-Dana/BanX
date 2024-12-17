@@ -201,6 +201,11 @@ const today = new Date();
 // Render calendar
 function renderCalendar() {
     const calendar = document.getElementById("payment-calendar");
+    if (!calendar) {
+        console.error("Calendar element not found!");
+        return; // Exit if calendar element doesn't exist
+    }
+
     calendar.innerHTML = ""; // Clear previous content
 
     const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -211,6 +216,7 @@ function renderCalendar() {
         calendar.appendChild(dayHeader);
     });
 
+    const today = new Date();
     const year = today.getFullYear();
     const month = today.getMonth();
     const firstDay = new Date(year, month, 1).getDay();
@@ -229,11 +235,6 @@ function renderCalendar() {
             dayCell.classList.add("current-day");
         }
 
-        if (recurringPayments.some(payment => payment.day === day)) {
-            dayCell.classList.add("recurring-payment");
-        }
-
-        dayCell.addEventListener("click", () => showAddPaymentModal(day));
         calendar.appendChild(dayCell);
     }
 }
