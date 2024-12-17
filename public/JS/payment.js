@@ -201,6 +201,11 @@ const today = new Date();
 // Render calendar
 function renderCalendar() {
     const calendar = document.getElementById("payment-calendar");
+    if (!calendar) {
+        console.error("Calendar element not found!");
+        return; // Exit if calendar element doesn't exist
+    }
+
     calendar.innerHTML = ""; // Clear previous content
 
     const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -211,29 +216,46 @@ function renderCalendar() {
         calendar.appendChild(dayHeader);
     });
 
+    const today = new Date();
     const year = today.getFullYear();
     const month = today.getMonth();
     const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
 
+    // Placeholder for recurring payments (you can expand this logic)
+    const recurringPayments = [
+        { day: 5, name: "Spotify", amount: 9.99 },
+        { day: 12, name: "Electricity Bill", amount: 50.0 },
+        { day: 20, name: "Netflix", amount: 19.99 },
+        { day: 25, name: "Gym Membership", amount: 35.0 }
+    ];
+
+    // Empty cells before the first day of the month
     for (let i = 0; i < firstDay; i++) {
         calendar.appendChild(document.createElement("div"));
     }
 
+    // Generate calendar days
     for (let day = 1; day <= daysInMonth; day++) {
         const dayCell = document.createElement("div");
         dayCell.classList.add("day");
         dayCell.textContent = day;
 
+        // Highlight current day
         if (day === today.getDate()) {
             dayCell.classList.add("current-day");
         }
 
-        if (recurringPayments.some(payment => payment.day === day)) {
+        // Highlight recurring payments
+        const isRecurring = recurringPayments.some(payment => payment.day === day);
+        if (isRecurring) {
             dayCell.classList.add("recurring-payment");
+            dayCell.title = "Recurring Payment"; // Tooltip for better UX
         }
 
+        // Add click functionality
         dayCell.addEventListener("click", () => showAddPaymentModal(day));
+
         calendar.appendChild(dayCell);
     }
 }
@@ -273,4 +295,5 @@ document.getElementById("add-recurring-payment-form").addEventListener("submit",
     renderUpcomingPayments();
     hideAddPaymentModal();
 });
+
 
